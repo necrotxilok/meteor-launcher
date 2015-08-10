@@ -1,0 +1,323 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.grid-container {
+  position: absolute;
+  top: 66px;
+  left: 0;
+  right: 10px;
+  bottom: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.grid {
+  position: relative;
+  height: 100%;
+  list-style: none;
+  /* Will be modified by the grid jquery lib, depending on the items */
+  -webkit-transition: width 0.2s;
+  margin: 20px 70px;
+  padding-bottom: 30px;
+
+  li {
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-transition: top 0.2s,
+                        left 0.2s,
+                        width 0.2s,
+                        height 0.2s,
+                        font-size 0.2s,
+                        line-height 0.2s;
+    
+    .inner {
+      position: absolute;
+      top: 0;
+      bottom: 10px;
+      left: 10px;
+      right: 0;
+      -webkit-transition: background 3s;
+    }
+
+    &.changed .inner {
+      -webkit-transition: none;
+    }
+    &.ui-draggable-dragging {
+      -webkit-transition: none;
+    }
+    &.position-highlight {
+      -webkit-transition: none;
+    }
+    &.position-highlight .inner {
+      border: none;
+      background: rgba(255,255,255,0.05);
+    }
+  }
+}
+
+.grid {
+  .item {
+    .controls {
+      position: absolute;
+      top: 0;
+      float: right;
+      font-size: 0.4em;
+      font-weight: normal;
+      line-height: 1em;
+      opacity: 0;
+      -webkit-transition: opacity 0.2s;
+
+      .view-port {
+        font-size: 0.6em;
+        float: left;
+        padding: 5px 0;
+      }
+
+      &.left {
+        left: 0;
+      }
+      &.right {
+        right: 0;
+      }
+    }
+    .project-controls {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -32px;
+      margin-top: -38px;
+      border: 4px solid #fff;
+      border-radius: 50%;
+      font-size: 64px;
+      background: rgba(0,0,0,0.2);
+
+      opacity: 0;
+      -webkit-transition: opacity 0.2s;
+      -webkit-transition: transform 0.2s;
+
+      a {
+        padding: 11px;
+      }
+
+      .mif-play {
+        position: relative;
+        left: 3px;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    &:hover {
+      .controls {
+        opacity: 1;
+      }
+      .project-controls {
+        opacity: 1;
+      }
+    }
+
+    a {
+      font-size: 0.6em;
+      float: left;
+      padding: 5px 6px;
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+}
+
+.grid {
+  .item {
+    .loading {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1000;
+      padding: 6px;
+
+      .loader {
+        font-size: 16px;
+      }
+
+      .message {
+        font-size: 11px;
+        margin-left: 10px;      
+      }
+
+      .console {
+        font-size: 0.2em;
+        line-height: 1.5;
+        margin: 1.5em 0;
+        max-height: 10.5em;
+        overflow: auto;
+      }
+    }
+
+    .project-launched {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-size: 0.4em;
+      font-weight: normal;
+      line-height: 1em;
+      background: rgba(0,0,0,0.6);
+      padding-bottom: 6px;
+
+      .message {
+        padding: 6px;
+        padding-left: 32px;
+        font-size: 0.85em;
+      }
+
+      .log-icon {
+        position: absolute;
+        top: 0;
+        font-size: 1.5em;
+        font-weight: normal;
+        line-height: 1em;
+        z-index: 1;
+        .project-log {
+          padding: 0px 7px;
+        }
+      }
+
+      .padding-left {
+        padding-left: 32px;
+      }
+
+      a {
+        float: none;
+        padding: 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.grid {
+  .item {
+    .project-launched {
+      .message, .view-log {
+        display: none;
+      }
+      .open-project {
+        display: block;
+        padding-top: 6px;
+        padding-bottom: 4px;
+      }
+    }
+
+    .tile-wide, .tile-large {
+      .project-launched {
+        .view-log {
+          display: block;
+        }
+      }
+    }
+
+    .tile-large {
+      .project-launched {
+        .message {
+          display: block;
+        }
+        .open-project {
+          display: inline;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.grid {
+  .item {
+    .project-stop, .project-launched, .loading, .project-log {
+      display: none;
+    }
+
+    &.state-loading {
+      .project-controls, .controls {
+        display: none;
+      }
+      .loading {
+        display: block;
+      }
+    }
+    &.state-launched {
+      .project-stop, .project-launched, .project-log {
+        display: block;
+      }
+      .project-play, .view-port, .project-settings {
+        display: none;
+      }      
+    }
+    &.state-error {
+
+    }
+    &.state-exited {
+
+    }
+  }
+}
+
+.tile-area {
+  background: url(../img/meteor-bg.jpg) fixed;
+}
+
+.tile-area-title img {
+  width: 60px;
+}
+
+.tile-area-controls {
+  position: fixed;
+  right: 40px;
+  top: 40px;
+}
+
+.tile-group {
+  //left: 100px;
+}
+
+.inner .tile {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+
+  .tile-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .tile-label {
+    font-size: 0.4em;
+  }
+}
+
+/*
+.tile, .tile-small, .tile-sqaure, .tile-wide, .tile-large, .tile-big, .tile-super {
+  opacity: 0;
+  -webkit-transform: scale(.8);
+  transform: scale(.8);
+}
+*/

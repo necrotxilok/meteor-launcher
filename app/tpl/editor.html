@@ -1,0 +1,56 @@
+{{#if editionMode}}
+  <div class="project-controls" data-project-id="{{project_id}}">
+    <button class="image-button button-play bg-green bg-active-darkGreen fg-white">Run<span class="icon mif-play"></span></button>
+    <!--<button class="image-button button-stop bg-gray bg-active-grayDarker fg-white">Stop<span class="icon mif-stop"></span></button>-->
+    <button class="image-button button-log bg-grayLight bg-active-gray fg-white">View Log<span class="icon mif-file-text"></span></button>
+  </div>
+{{/if}}
+<label>Name</label>
+<div class="input-control text full-size">
+    <input id="projectName" type="text" value="{{project.name}}" data-validate-hint="This field can not be empty!">
+    <span class="input-state-error mif-warning"></span>
+    <span class="input-state-success mif-checkmark"></span>
+</div>
+<label>Project folder</label>
+<div class="input-control text text-file full-size">
+    <input id="projectFolderText" type="text" value="{{project.folder}}" data-validate-hint="This field can not be empty!">
+    <button class="button file"><span class="mif-folder-open"></span><input id="projectFolder" type="file" webkitdirectory></button>
+</div>
+<label>Port</label>
+<div class="input-control number full-size">
+    <input id="projectPort" type="number" value="{{project.port}}" data-validate-hint="Enter a port greater or equal than 3000!">
+</div>
+<label>Color</label>
+<div class="schemeButtons" data-role="group" data-group-type="one-state">
+  <div class="button square-button bg-grayLight" data-scheme="bg-grayLight"><span class="color bg-grayLight"></span></div>
+  <div class="button square-button bg-emerald" data-scheme="bg-emerald"><span class="color bg-emerald"></span></div>
+  <div class="button square-button bg-green" data-scheme="bg-green"><span class="color bg-green"></span></div>
+  <div class="button square-button bg-cyan" data-scheme="bg-cyan"><span class="color bg-cyan"></span></div>
+  <div class="button square-button bg-teal" data-scheme="bg-teal"><span class="color bg-teal"></span></div>
+  <div class="button square-button bg-darkBlue" data-scheme="bg-darkCyan"><span class="color bg-darkCyan"></span></div>
+  <div class="button square-button bg-gray" data-scheme="bg-gray"><span class="color bg-gray"></span></div>
+  <div class="button square-button bg-cobalt" data-scheme="bg-cobalt"><span class="color bg-cobalt"></span></div>
+  <div class="button square-button bg-indigo" data-scheme="bg-indigo"><span class="color bg-indigo"></span></div>
+  <div class="button square-button bg-darkIndigo" data-scheme="bg-darkIndigo"><span class="color bg-darkIndigo"></span></div>
+  <div class="button square-button bg-red" data-scheme="bg-red"><span class="color bg-red"></span></div>
+  <div class="button square-button bg-orange" data-scheme="bg-orange"><span class="color bg-orange"></span></div>
+  <div class="button square-button bg-grayDark" data-scheme="bg-grayDark"><span class="color bg-grayDark"></span></div>
+  <div class="button square-button bg-pink" data-scheme="bg-pink"><span class="color bg-pink"></span></div>
+  <div class="button square-button bg-darkOrange" data-scheme="bg-darkOrange"><span class="color bg-darkOrange"></span></div>
+  <div class="button square-button bg-crimson" data-scheme="bg-crimson"><span class="color bg-crimson"></span></div>
+  <div class="button square-button bg-darkMagenta" data-scheme="bg-darkMagenta"><span class="color bg-darkMagenta"></span></div>
+  <div class="button square-button bg-darkTeal" data-scheme="bg-darkTeal"><span class="color bg-darkTeal"></span></div>
+</div>
+<label>Image</label>
+<div class="input-control text text-image full-size">
+    <input id="projectImageText" type="text" value="{{project.image}}">
+    <button id="projectImageClear" class="button clear"><span class="mif-cross"></span></button>
+    <button class="button file"><span class="mif-image"></span><input id="projectImage" type="file" accept="image/*"></button>
+</div>
+<div class="actions">
+{{#if editionMode}}
+  <button class="image-button button-remove bg-red bg-active-darkRed fg-white" data-project-id="{{project_id}}">Remove<span class="icon mif-bin"></span></button>
+{{else}}
+  <button class="image-button button-save bg-darkCyan bg-active-darkBlue fg-white">Add<span class="icon mif-plus"></span></button>
+{{/if}}
+</div>

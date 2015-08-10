@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="meteorLauncher">
+  <head>
+    <title>Meteor Launcher</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- Vendor Libraries -->
+    <script type="text/javascript" src="vendor/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="vendor/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="vendor/handlebars/handlebars-v3.0.3.js"></script>
+
+    <!-- GridList Plugin -->
+    <script type="text/javascript" src="vendor/gridList/gridList.js"></script>
+    <script type="text/javascript" src="vendor/gridList/jquery.gridList.js"></script>
+
+    <!-- Metro Theme -->
+    <link rel="stylesheet" type="text/css" href="vendor/metro/css/metro.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/metro/css/metro-icons.min.css">
+    <script type="text/javascript" src="vendor/metro/js/metro.min.js"></script>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- App -->
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <!-- Libraries -->
+    <script type="text/javascript" src="js/lib/file.js"></script>
+    <script type="text/javascript" src="js/lib/process.js"></script>
+    <script type="text/javascript" src="js/lib/template.js"></script>
+
+    <!-- Components -->
+    <script type="text/javascript" src="js/component/charm.js"></script>
+    <script type="text/javascript" src="js/component/dialog.js"></script>
+    <script type="text/javascript" src="js/component/tile.js"></script>
+
+    <!-- User Interface -->
+    <script type="text/javascript" src="js/ui/project.js"></script>
+    <script type="text/javascript" src="js/ui/grid.js"></script>
+    <script type="text/javascript" src="js/ui/settings.js"></script>
+
+  </head>
+  <body class="tile-area-scheme-dark">
+    <div class="charm right-side padding20 bg-grayDark" id="charmEditor">
+        <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
+        <h1 class="text-light">Project</h1>
+        <hr class="thin">
+        <br>
+        <div class="charm-content-container"></div>
+    </div>
+
+    <div class="charm right-side padding20 bg-grayDark" id="charmSearch">
+        <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
+        <h1 class="text-light">Search</h1>
+        <hr class="thin">
+        <br>
+        <div class="input-control text full-size">
+            <input type="text" class='input-search'>
+            <button class="button"><span class="mif-search"></span></button>
+        </div>
+        <div class="search-results"></div>
+    </div>
+
+    <div class="charm right-side padding20 bg-grayDark" id="charmSettings" style="right: -300px;">
+        <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
+        <h1 class="text-light">Settings</h1>
+        <hr class="thin">
+        <br>
+        <div class="about"><a href="#" class="about-link">About...</a></div>
+    </div>
+
+    <div class="tile-area fg-white tile-area-scheme-dark">
+        <h1 class="tile-area-title"><img src="img/meteor_launcher.png"> Meteor Launcher</h1>
+        <div class="tile-area-controls">
+            <!--
+            <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">Sergey Pimenov</span> <span class="icon mif-user"></span></button>
+            -->
+            <button class="add-project square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmEditor" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Add new project"><span class="mif-plus"></span></button>
+            <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSearch" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Search project"><span class="mif-search"></span></button>
+            <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSettings" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Settings"><span class="mif-cog"></span></button>
+            <!--
+            <a href="#" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
+            -->
+        </div>
+
+        <ul id="grid" class="grid">
+          <li class="position-highlight">
+            <div class="inner"></div>
+          </li>
+        </ul>
+
+    </div>
+
+  </body>
+</html>

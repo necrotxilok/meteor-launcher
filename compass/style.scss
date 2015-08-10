@@ -1,0 +1,213 @@
+
+@import 'grid';
+
+.main {
+  padding: 10px;
+}
+
+
+.charm.right-side {
+  width: 300px;
+  right: -300px;
+  overflow: auto;
+
+  label {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .project-controls {
+    margin-bottom: 20px;
+
+    .image-button {
+      .icon {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .actions {
+    margin-top: 20px;
+
+    .image-button {
+      .icon {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .search-results {
+    margin-top: 10px;
+    .result {
+      background: #555;
+      padding: 10px;
+      overflow: auto;
+      margin-bottom: 6px;
+      cursor: pointer;
+      -webkit-transition: all 0.2s ease-in-out;
+
+      .helper {
+        float: left;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+        margin-right: 10px;
+        overflow: hidden;
+        position: relative;
+        .img {
+          background-position: center;
+          background-size: cover;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      }
+
+      .name {
+        font-size: 16px;
+        margin: 2px 0 4px;
+      }
+      .port {
+        font-size: 12px;
+      }
+
+      &:hover {
+        background: #777;
+      }
+    }
+  }
+
+  .about {
+    position: absolute;
+    bottom: 20px;
+    .about-link {
+      color: #fff;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.charm-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+#charmSettings .button {
+  margin: 5px;
+}
+
+.input-control.text-file {
+  input[type="text"] {
+    width: 213px;
+  }
+  input[type="text"]:disabled {
+    width: 100%;
+  }
+}
+.input-control.text-image {
+  input[type="text"] {
+    width: 190px;
+  }
+  .button.clear {
+    padding: 0px 10px;
+  }
+  .button.file {
+    right: 35px;
+    padding: 0px 10px;
+  }
+}
+button.file {
+  overflow: hidden;
+  input[type="file"] {
+    padding: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: none;
+    cursor: pointer;   
+  }
+}
+
+
+.group-of-buttons.schemeButtons {
+  .color {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .active {
+    border: 3px solid #fff;
+  }
+}
+
+.dialog-overlay {
+  z-index: 1200;
+
+  &.black-overlay {
+    background-color: rgba(0,0,0,0.2);
+  }
+}
+.dialog {
+  z-index: 1201;
+  p {
+    margin-bottom: 10px;
+  }
+  p.small {
+    font-size: 0.8em;
+  }
+  .actions {
+    margin-top: 20px;
+    text-align: right;
+
+    .button {
+      margin-left: 10px; 
+    }
+  }
+
+  &.big-dialog {
+    top: 20px !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    right: 20px !important;
+
+    p {
+      margin: 0;
+      line-height: 1.3;      
+    }
+
+    .dialog-close-button {
+      background-color: transparent;
+      color: white;
+      font-size: 37px;
+      width: auto;
+      height: auto;
+      min-height: 0;
+      padding: 0px 10px;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: rgba(0,0,0, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+}
+::-webkit-scrollbar-corner {
+  background: #000;
+}
+
