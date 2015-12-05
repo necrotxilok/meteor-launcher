@@ -11,7 +11,7 @@ App = {};
 (function(document, window, $, undefined) {
   'use strict';
 
-  var debugMode = false;
+  var debugMode = true;
 
   App.nwGui = require('nw.gui');
   App.win = App.nwGui.Window.get();

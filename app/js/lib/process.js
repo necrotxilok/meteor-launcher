@@ -42,35 +42,43 @@
       return portStatus;
     }
 
-    // A simple function to get all children in Windows
-    // TODO: Linux/MAC
+    // A simple function to get all children in Windows, Linux and OS-X
     function getAllChildrenProcesses(pid) {
       var execSync = require('child_process').execSync;
       var cmd_output;
+      var enterCode;
 
-      if (process.platform === 'win32') {
+      if (process.platform === 'win32') {       // Widows
+        enterCode = '\r\n';
         try {
           cmd_output = execSync('wmic process where (ParentProcessId=' + pid + ') get ProcessId');
         } catch(err) {
           return [];
         }
-
-        if (cmd_output) {
-            var p_strings = cmd_output.toString().split('\r\n');
-            var pids = [];
-
-            _.each(p_strings, function(p) {
-              p = p.trim();
-
-              if ($.isNumeric(p)) {
-                p = parseInt(p);
-                pids.push(p);
-                pids = _.union(pids, getAllChildrenProcesses(p));
-              }
-            });
-
-            return pids;
+      } else {                                  // Linux and OS-X
+        enterCode = '\n';
+        try {
+          cmd_output = execSync('pgrep -P ' + pid);
+        } catch(err) {
+          return [];
         }
+      }
+
+      if (cmd_output) {
+          var p_strings = cmd_output.toString().split(enterCode);
+          var pids = [];
+
+          _.each(p_strings, function(p) {
+            p = p.trim();
+
+            if ($.isNumeric(p)) {
+              p = parseInt(p);
+              pids.push(p);
+              pids = _.union(pids, getAllChildrenProcesses(p));
+            }
+          });
+
+          return pids;
       }
 
       return [];
@@ -94,6 +102,13 @@
 
     var startMeteorApp = function(project_id) {
       var project = findProject(project_id);
+      var execFile;
+
+      if (process.platform == 'win32') {
+        execFile = 'meteor.bat';
+      } else {
+        execFile = 'meteor';
+      }
 
       logs[project_id] = [];
 
@@ -105,7 +120,7 @@
               watch: $.Deferred(),
               port: project.port,
               folder: project.folder,
-              proc: exec('meteor.bat -p ' + project.port, {cwd: project.folder}),
+              proc: exec(execFile + ' -p ' + project.port, {cwd: project.folder}),
               c_procs: []
             };
 
