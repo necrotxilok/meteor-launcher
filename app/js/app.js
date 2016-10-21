@@ -43,9 +43,9 @@ App = {};
     if (debugMode) {
       $('body').on('keyup', function(event) {
         // Reload by pressing F5
-        if (event.keyCode == 116) {
+        /*if (event.keyCode == 116) {
           window.location.reload();
-        }
+        }*/
         // Open Dev Tools by pressing F12
         if (event.keyCode == 123) {
           App.win.showDevTools();

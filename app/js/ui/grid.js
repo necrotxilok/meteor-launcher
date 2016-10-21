@@ -97,7 +97,7 @@
           var page = $(document);
           var scroll_value = delta * 50;
           page.scrollLeft(page.scrollLeft() - scroll_value);
-          return false;
+          //return false;
       });
     }
 
