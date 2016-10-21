@@ -18,6 +18,7 @@
    
     var _self = this;
     var $item;
+    var $log
 
     var project_id;
 
@@ -72,24 +73,26 @@
 
     var playProject = function() {
       var meteor = App.Process.run(project_id);
-      var $console = $item.find('.console');
+      //var $console = $item.find('.console');
 
-      $console.empty();
+      //$console.empty();
 
       if (meteor) {
-        setState('loading');
+        //setState('loading');
+        setState('launched');
+        viewProjectLog();
 
         // Controls meteor start up 
-        meteor.up.done(function() {
+        /*meteor.up.done(function() {
           setState('launched');
         });
         meteor.up.fail(function() {
           setState('error');
           //viewProjectLog();
         });
-        meteor.up.progress(function(data) {
-          $console.append('<p>' + data + '</p>');
-        });
+        meteor.up.progress(function(msg) {
+          $console.append('<p>' + msg + '</p>');
+        });*/
 
         // Watch launched app
         meteor.watch.done(function() {
@@ -97,8 +100,12 @@
         });
         meteor.watch.fail(function() {
           setState('exited');
-          viewProjectLog();
+          //viewProjectLog();
         });
+        meteor.watch.progress(function(msg) {
+          showLogMessage(msg);
+        });
+
       } else {
         setState('error');
         viewProjectLog();
@@ -113,12 +120,30 @@
 
     var viewProjectLog = function() {
       var log = App.Process.getLog(project_id);
-      var dialog = new Dialog('Project Log', '<div class="log-file"></div>', {className: 'big-dialog', background: 'bg-grayDark', color: 'fg-white'});
-      var $log = dialog.find('.log-file');
+      var dialog = new Dialog('Project Log', '<div class="log-file" data-id="' + project_id + '"></div>', {className: 'big-dialog', background: 'bg-grayDark', color: 'fg-white'});
+      $log = dialog.find('.log-file');
       _.each(log, function(line) {
         $log.append('<p>' + line + '</p>');
       });
       dialog.open();
+      var scrollHeight = $log.get(0).scrollHeight;
+      $log.animate({'scrollTop': scrollHeight}, 500);
+      $log.on('click', '.open-project', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var url = $(e.currentTarget).attr('href');
+        App.nwGui.Shell.openExternal(url);
+      });
+    }
+
+    var showLogMessage = function(message) {
+      var log_id = $log.data('id');
+      console.log("Show Log Line", project_id, log_id);
+      if (log_id == project_id) {
+        $log.append('<p>' + message + '</p>');
+        var scrollHeight = $log.get(0).scrollHeight;
+        $log.animate({'scrollTop': scrollHeight}, 500);
+      }
     }
 
     var bindEvents = function() {

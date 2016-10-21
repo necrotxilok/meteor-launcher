@@ -20,7 +20,14 @@
     }
 
     function getSettingsPath() {
-      var userPath = process.env.USERPROFILE;
+      var userPath;
+
+      if (process.platform == 'win32') {             // Windows
+        userPath = process.env.USERPROFILE;
+      } else {                                       // Linux and MAC
+        userPath = process.env.HOME;
+      }
+
       var settingsPath = userPath + DS + '.meteor-launcher';
 
       if (!fs.existsSync(settingsPath)) {

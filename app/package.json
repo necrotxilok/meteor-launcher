@@ -12,23 +12,18 @@
         "force_download": false, 
         "linux-x64": false
     }, 
-    "main": "index.html", 
-    "description": "", 
-    "name": "meteor-launcher", 
-    "nodejs": true, 
-    "user-agent": "", 
-    "additional_trust_anchors": "", 
     "single-instance": true, 
+    "description": "", 
+    "nodejs": true, 
+    "chromium-args": "", 
+    "additional_trust_anchors": "", 
+    "js-flags": "", 
+    "user-agent": "", 
     "inject-js-end": "", 
-    "webkit": {
-        "page-cache": false, 
-        "java": false, 
-        "plugin": false
-    }, 
+    "keywords": [], 
     "window": {
-        "transparent": false, 
         "fullscreen": false, 
-        "height": 660, 
+        "icon": "favicon.png", 
         "resizable": true, 
         "show": true, 
         "always-on-top": false, 
@@ -39,22 +34,27 @@
         "min_height": 480, 
         "visible": true, 
         "as_desktop": false, 
+        "toolbar": false, 
+        "mac_icon": "", 
         "min_width": 700, 
         "position": "center", 
         "show_in_taskbar": true, 
-        "mac_icon": "", 
-        "exe_icon": "", 
+        "height": 660, 
         "width": 980, 
-        "toolbar": false, 
-        "icon": "favicon.png"
+        "transparent": false, 
+        "exe_icon": ""
     }, 
     "version": "0.0.1", 
     "snapshot": "", 
     "node-main": "", 
-    "keywords": [], 
+    "webkit": {
+        "page-cache": false, 
+        "java": false, 
+        "plugin": false
+    }, 
     "inject-js-start": "", 
     "node-remote": "", 
-    "js-flags": "", 
-    "app_name": "meteor-launcher", 
-    "chromium-args": ""
+    "main": "index.html", 
+    "app_name": "Meteor Launcher", 
+    "name": "meteor-launcher"
 }

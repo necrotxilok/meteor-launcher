@@ -42,35 +42,43 @@
       return portStatus;
     }
 
-    // A simple function to get all children in Windows
-    // TODO: Linux/MAC
+    // A simple function to get all children in Windows, Linux and OS-X
     function getAllChildrenProcesses(pid) {
       var execSync = require('child_process').execSync;
       var cmd_output;
+      var enterCode;
 
-      if (process.platform === 'win32') {
+      if (process.platform === 'win32') {       // Widows
+        enterCode = '\r\n';
         try {
           cmd_output = execSync('wmic process where (ParentProcessId=' + pid + ') get ProcessId');
         } catch(err) {
           return [];
         }
-
-        if (cmd_output) {
-            var p_strings = cmd_output.toString().split('\r\n');
-            var pids = [];
-
-            _.each(p_strings, function(p) {
-              p = p.trim();
-
-              if ($.isNumeric(p)) {
-                p = parseInt(p);
-                pids.push(p);
-                pids = _.union(pids, getAllChildrenProcesses(p));
-              }
-            });
-
-            return pids;
+      } else {                                  // Linux and OS-X
+        enterCode = '\n';
+        try {
+          cmd_output = execSync('pgrep -P ' + pid);
+        } catch(err) {
+          return [];
         }
+      }
+
+      if (cmd_output) {
+          var p_strings = cmd_output.toString().split(enterCode);
+          var pids = [];
+
+          _.each(p_strings, function(p) {
+            p = p.trim();
+
+            if ($.isNumeric(p)) {
+              p = parseInt(p);
+              pids.push(p);
+              pids = _.union(pids, getAllChildrenProcesses(p));
+            }
+          });
+
+          return pids;
       }
 
       return [];
@@ -94,51 +102,70 @@
 
     var startMeteorApp = function(project_id) {
       var project = findProject(project_id);
+      var execFile;
+      var meteor = {
+        up: $.Deferred(),
+        watch: $.Deferred(),
+        port: project.port,
+        folder: project.folder,
+        proc: null,
+        c_procs: []
+      };
+
+      var logMessage = function(message) {
+        logs[project_id].push(message);
+        //meteor.up.notify(message);
+        meteor.watch.notify(message);
+      }
+
+      if (process.platform == 'win32') {
+        execFile = 'meteor.bat';
+      } else {
+        execFile = 'meteor';
+      }
 
       logs[project_id] = [];
 
       if (fs.existsSync(project.folder)) {
         if (freeFolder(project.folder)) {
           if (freePort(project.port)) {
-            var meteor = {
-              up: $.Deferred(),
-              watch: $.Deferred(),
-              port: project.port,
-              folder: project.folder,
-              proc: exec('meteor.bat -p ' + project.port, {cwd: project.folder}),
-              c_procs: []
-            };
+            meteor.proc = exec(execFile + ' -p ' + project.port, {cwd: project.folder});
 
-            logs[project_id].push('Launching app...');
-            logs[project_id].push('&nbsp;');
+            logMessage('Launching ' + project.name + ' App...');
+            logMessage('PORT: ' + project.port);
+            logMessage('URL: <a href="http://localhost:' + project.port + '/" class="open-project">http://localhost:' + project.port + '/</a>');
+            logMessage('&nbsp;');
 
             meteor.proc.stdout.on('data', function (data) {
               //console.log('>', data);
               if (data.match('App running')) {
                 meteor.c_procs = getAllChildrenProcesses(meteor.proc.pid);
-                logs[project_id].push('&nbsp;');
-                logs[project_id].push('Meteor App started!!');
-                meteor.up.resolve();
+                logMessage('&nbsp;');
+                logMessage('Meteor App started!!');
+                //meteor.up.resolve();
               } else {
-                logs[project_id].push(data);
-                meteor.up.notify(data);
+                if (!data.match('Control-C')) {
+                  logMessage(data);
+                }
               }
             });
 
             meteor.proc.stderr.on('data', function (error_info) {
-              logs[project_id].push('ERROR: ' + error_info);
-              meteor.up.reject();
+              logMessage('ERROR: ' + error_info);
+              //meteor.up.reject();
               delete procs[project_id];
             });
 
             meteor.proc.on('exit', function (code) {
               if (code) {
-                logs[project_id].push('&nbsp;');
-                logs[project_id].push('Meteor process exited with code ' + code);
+                logMessage('&nbsp;');
+                logMessage('Meteor process exited with code ' + code);
+                meteor.up.reject();
                 meteor.watch.reject();
               } else {
-                logs[project_id].push('&nbsp;');
-                logs[project_id].push('Meteor App finished.');
+                logMessage('&nbsp;');
+                logMessage('Meteor App finished.');
+                meteor.up.resolve();
                 meteor.watch.resolve();
               }
               delete procs[project_id];
@@ -146,13 +173,13 @@
 
             return meteor;
           } else {
-            logs[project_id].push('The port ' + project.port + ' or ' + (project.port + 1) + ' is used by another Meteor App or by MongoDB.');
+            logMessage('The port ' + project.port + ' or ' + (project.port + 1) + ' is used by another Meteor App or by MongoDB.');
           }
         } else {
-          logs[project_id].push('Another Meteor App is running in the folder "' + project.folder + '". Please, check if the settings are correct.');
+          logMessage('Another Meteor App is running in the folder "' + project.folder + '". Please, check if the settings are correct.');
         }
       } else {
-        logs[project_id].push('The project cannot run in the path "' + project.folder + '". Please, check if the path exists and you have access to it.');
+        logMessage('The project cannot run in the path "' + project.folder + '". Please, check if the path exists and you have access to it.');
       }
 
       return false;
