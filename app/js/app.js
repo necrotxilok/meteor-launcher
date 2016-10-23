@@ -39,6 +39,13 @@ App = {};
     App.settings = App.File.getSettings();
     App.projects = App.File.getProjects();
 
+    $('body').on('click', 'a.open-external', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var url = $(e.currentTarget).attr('href');
+      App.nwGui.Shell.openExternal(url);
+    });
+
     // ------- DEBUG FUNCTIONS
     if (debugMode) {
       $('body').on('keyup', function(event) {

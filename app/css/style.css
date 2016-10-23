@@ -1,9 +1,99 @@
-/* line 1, ../compass/_grid.scss */
+/* line 2, ../compass/_base.scss */
 * {
   margin: 0;
   padding: 0; }
 
-/* line 6, ../compass/_grid.scss */
+/* line 7, ../compass/_base.scss */
+body {
+  overflow: hidden; }
+  /* line 9, ../compass/_base.scss */
+  body .app-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: auto; }
+
+/* line 16, ../compass/_base.scss */
+.main {
+  padding: 10px; }
+
+/* line 20, ../compass/_base.scss */
+.image-button {
+  padding: 0 1rem 0 2.125rem; }
+  /* line 22, ../compass/_base.scss */
+  .image-button .icon {
+    background-color: transparent; }
+
+/* line 28, ../compass/_base.scss */
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: rgba(0, 0, 0, 0.4); }
+
+/* line 33, ../compass/_base.scss */
+::-webkit-scrollbar-thumb {
+  background: #444; }
+
+/* line 36, ../compass/_base.scss */
+::-webkit-scrollbar-corner {
+  background: #000; }
+
+/* line 2, ../compass/_charm.scss */
+.charm-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1051;
+  background: rgba(0, 0, 0, 0.3); }
+
+/* line 12, ../compass/_charm.scss */
+#charmSettings .button {
+  margin: 5px; }
+
+/* line 16, ../compass/_charm.scss */
+.charm.right-side {
+  width: 350px;
+  right: -350px;
+  overflow: auto; }
+  /* line 21, ../compass/_charm.scss */
+  .charm.right-side label {
+    display: block;
+    margin-top: 6px; }
+
+/* line 5, ../compass/_dialog.scss */
+.dialog-overlay.black-overlay {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+/* line 12, ../compass/_dialog.scss */
+.dialog p {
+  margin-bottom: 10px; }
+/* line 15, ../compass/_dialog.scss */
+.dialog p.small {
+  font-size: 0.8em; }
+/* line 18, ../compass/_dialog.scss */
+.dialog .actions {
+  margin-top: 20px;
+  text-align: right; }
+  /* line 22, ../compass/_dialog.scss */
+  .dialog .actions .button {
+    margin-left: 10px; }
+
+/* line 3, ../compass/_grid.scss */
+.tile-area {
+  background: url(../img/meteor-bg.jpg) fixed; }
+
+/* line 7, ../compass/_grid.scss */
+.tile-area-title img {
+  width: 60px; }
+
+/* line 11, ../compass/_grid.scss */
+.tile-area-controls {
+  position: fixed;
+  right: 40px;
+  top: 40px; }
+
+/* line 21, ../compass/_grid.scss */
 .grid-container {
   position: absolute;
   top: 66px;
@@ -13,7 +103,7 @@
   overflow-x: auto;
   overflow-y: hidden; }
 
-/* line 16, ../compass/_grid.scss */
+/* line 31, ../compass/_grid.scss */
 .grid {
   position: relative;
   height: 100%;
@@ -22,13 +112,13 @@
   -webkit-transition: width 0.2s;
   margin: 20px 70px;
   padding-bottom: 30px; }
-  /* line 25, ../compass/_grid.scss */
+  /* line 40, ../compass/_grid.scss */
   .grid li {
     position: absolute;
     z-index: 1;
     cursor: pointer;
     -webkit-transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, font-size 0.2s, line-height 0.2s; }
-    /* line 36, ../compass/_grid.scss */
+    /* line 51, ../compass/_grid.scss */
     .grid li .inner {
       position: absolute;
       top: 0;
@@ -36,192 +126,91 @@
       left: 10px;
       right: 0;
       -webkit-transition: background 3s; }
-    /* line 45, ../compass/_grid.scss */
+    /* line 60, ../compass/_grid.scss */
     .grid li.changed .inner {
       -webkit-transition: none; }
-    /* line 48, ../compass/_grid.scss */
+    /* line 63, ../compass/_grid.scss */
     .grid li.ui-draggable-dragging {
       -webkit-transition: none; }
-    /* line 51, ../compass/_grid.scss */
+    /* line 66, ../compass/_grid.scss */
     .grid li.position-highlight {
       -webkit-transition: none; }
-    /* line 54, ../compass/_grid.scss */
+    /* line 69, ../compass/_grid.scss */
     .grid li.position-highlight .inner {
       border: none;
       background: rgba(255, 255, 255, 0.05); }
 
-/* line 63, ../compass/_grid.scss */
+/* line 8, ../compass/_project_item.scss */
 .grid .item .controls {
   position: absolute;
   top: 0;
-  float: right;
   font-size: 0.4em;
   font-weight: normal;
   line-height: 1em;
   opacity: 0;
   -webkit-transition: opacity 0.2s; }
-  /* line 73, ../compass/_grid.scss */
-  .grid .item .controls .view-port {
-    font-size: 0.6em;
-    float: left;
-    padding: 5px 0; }
-  /* line 79, ../compass/_grid.scss */
+  /* line 17, ../compass/_project_item.scss */
   .grid .item .controls.left {
     left: 0; }
-  /* line 82, ../compass/_grid.scss */
+  /* line 20, ../compass/_project_item.scss */
   .grid .item .controls.right {
     right: 0; }
-/* line 86, ../compass/_grid.scss */
-.grid .item .project-controls {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -32px;
-  margin-top: -38px;
-  border: 4px solid #fff;
-  border-radius: 50%;
-  font-size: 64px;
-  background: rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  -webkit-transition: opacity 0.2s;
-  -webkit-transition: transform 0.2s; }
-  /* line 101, ../compass/_grid.scss */
-  .grid .item .project-controls a {
-    padding: 11px; }
-  /* line 105, ../compass/_grid.scss */
-  .grid .item .project-controls .mif-play {
-    position: relative;
-    left: 3px; }
-  /* line 110, ../compass/_grid.scss */
-  .grid .item .project-controls:hover {
-    transform: scale(1.2); }
-/* line 116, ../compass/_grid.scss */
+/* line 25, ../compass/_project_item.scss */
 .grid .item:hover .controls {
   opacity: 1; }
-/* line 119, ../compass/_grid.scss */
-.grid .item:hover .project-controls {
-  opacity: 1; }
-/* line 124, ../compass/_grid.scss */
+/* line 30, ../compass/_project_item.scss */
 .grid .item a {
   font-size: 0.6em;
   float: left;
   padding: 5px 6px;
   text-decoration: none;
   color: #fff; }
-
-/* line 136, ../compass/_grid.scss */
-.grid .item .loading {
+/* line 38, ../compass/_project_item.scss */
+.grid .item .project-icon {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-  padding: 6px; }
-  /* line 146, ../compass/_grid.scss */
-  .grid .item .loading .loader {
-    font-size: 16px; }
-  /* line 150, ../compass/_grid.scss */
-  .grid .item .loading .message {
-    font-size: 11px;
-    margin-left: 10px; }
-  /* line 155, ../compass/_grid.scss */
-  .grid .item .loading .console {
-    font-size: 0.2em;
-    line-height: 1.5;
-    margin: 1.5em 0;
-    max-height: 10.5em;
-    overflow: auto; }
-/* line 164, ../compass/_grid.scss */
+  top: 50%;
+  left: 50%;
+  margin-left: -32px;
+  margin-top: -38px;
+  font-size: 64px;
+  opacity: 0.1; }
+  /* line 47, ../compass/_project_item.scss */
+  .grid .item .project-icon.hidden {
+    display: none; }
+/* line 59, ../compass/_project_item.scss */
+.grid .item .tile-large .project-icon {
+  transform: scale(2); }
+/* line 68, ../compass/_project_item.scss */
+.grid .item .project-idle {
+  display: block; }
+/* line 71, ../compass/_project_item.scss */
 .grid .item .project-launched {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  font-size: 0.4em;
-  font-weight: normal;
-  line-height: 1em;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.6);
-  padding-bottom: 6px; }
-  /* line 175, ../compass/_grid.scss */
-  .grid .item .project-launched .message {
-    padding: 6px;
-    padding-left: 32px;
-    font-size: 0.85em; }
-  /* line 181, ../compass/_grid.scss */
-  .grid .item .project-launched .log-icon {
-    position: absolute;
-    top: 0;
-    font-size: 1.5em;
-    font-weight: normal;
-    line-height: 1em;
-    z-index: 1; }
-    /* line 188, ../compass/_grid.scss */
-    .grid .item .project-launched .log-icon .project-log {
-      padding: 0px 7px; }
-  /* line 193, ../compass/_grid.scss */
-  .grid .item .project-launched .padding-left {
-    padding-left: 32px; }
-  /* line 197, ../compass/_grid.scss */
-  .grid .item .project-launched a {
-    float: none;
-    padding: 0; }
-    /* line 201, ../compass/_grid.scss */
-    .grid .item .project-launched a:hover {
-      text-decoration: underline; }
-
-/* line 212, ../compass/_grid.scss */
-.grid .item .project-launched .message, .grid .item .project-launched .view-log {
-  display: none; }
-/* line 215, ../compass/_grid.scss */
-.grid .item .project-launched .open-project {
-  display: block;
-  padding-top: 6px;
-  padding-bottom: 4px; }
-/* line 224, ../compass/_grid.scss */
-.grid .item .tile-wide .project-launched .view-log, .grid .item .tile-large .project-launched .view-log {
+  padding-bottom: 6px;
+  border: 3px solid #60a917; }
+  /* line 83, ../compass/_project_item.scss */
+  .grid .item .project-launched .launch-title {
+    padding: 3px;
+    padding-left: 10px;
+    font-size: 11px; }
+  /* line 89, ../compass/_project_item.scss */
+  .grid .item .project-launched .controls {
+    top: 20px;
+    left: 6px; }
+/* line 97, ../compass/_project_item.scss */
+.grid .item.state-launched .project-launched {
   display: block; }
-/* line 232, ../compass/_grid.scss */
-.grid .item .tile-large .project-launched .message {
-  display: block; }
-/* line 235, ../compass/_grid.scss */
-.grid .item .tile-large .project-launched .open-project {
-  display: inline;
-  padding-top: 0;
-  padding-bottom: 0; }
-
-/* line 247, ../compass/_grid.scss */
-.grid .item .project-stop, .grid .item .project-launched, .grid .item .loading, .grid .item .project-log {
-  display: none; }
-/* line 252, ../compass/_grid.scss */
-.grid .item.state-loading .project-controls, .grid .item.state-loading .controls {
-  display: none; }
-/* line 255, ../compass/_grid.scss */
-.grid .item.state-loading .loading {
-  display: block; }
-/* line 260, ../compass/_grid.scss */
-.grid .item.state-launched .project-stop, .grid .item.state-launched .project-launched, .grid .item.state-launched .project-log {
-  display: block; }
-/* line 263, ../compass/_grid.scss */
-.grid .item.state-launched .project-play, .grid .item.state-launched .view-port, .grid .item.state-launched .project-settings {
+/* line 100, ../compass/_project_item.scss */
+.grid .item.state-launched .project-idle {
   display: none; }
 
-/* line 276, ../compass/_grid.scss */
-.tile-area {
-  background: url(../img/meteor-bg.jpg) fixed; }
-
-/* line 280, ../compass/_grid.scss */
-.tile-area-title img {
-  width: 60px; }
-
-/* line 284, ../compass/_grid.scss */
-.tile-area-controls {
-  position: fixed;
-  right: 40px;
-  top: 40px; }
-
-/* line 294, ../compass/_grid.scss */
+/* line 117, ../compass/_project_item.scss */
 .inner .tile {
   margin: 0;
   position: absolute;
@@ -231,14 +220,14 @@
   right: 0;
   width: auto;
   height: auto; }
-  /* line 304, ../compass/_grid.scss */
+  /* line 127, ../compass/_project_item.scss */
   .inner .tile .tile-content {
     display: block;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center; }
-  /* line 312, ../compass/_grid.scss */
+  /* line 135, ../compass/_project_item.scss */
   .inner .tile .tile-label {
     font-size: 0.4em; }
 
@@ -249,214 +238,201 @@
   transform: scale(.8);
 }
 */
-/* line 4, ../compass/style.scss */
-.main {
-  padding: 10px; }
-
-/* line 9, ../compass/style.scss */
-.charm.right-side {
-  width: 300px;
-  right: -300px;
-  overflow: auto; }
-  /* line 14, ../compass/style.scss */
-  .charm.right-side label {
-    display: block;
-    margin-top: 6px; }
-  /* line 19, ../compass/style.scss */
-  .charm.right-side .project-controls {
-    margin-bottom: 20px; }
-    /* line 23, ../compass/style.scss */
-    .charm.right-side .project-controls .image-button .icon {
-      background-color: transparent; }
-  /* line 29, ../compass/style.scss */
-  .charm.right-side .actions {
-    margin-top: 20px; }
-    /* line 33, ../compass/style.scss */
-    .charm.right-side .actions .image-button .icon {
-      background-color: transparent; }
-  /* line 39, ../compass/style.scss */
-  .charm.right-side .search-results {
-    margin-top: 10px; }
-    /* line 41, ../compass/style.scss */
-    .charm.right-side .search-results .result {
-      background: #555;
-      padding: 10px;
+/* line 2, ../compass/_project_view.scss */
+.dialog.project-dialog {
+  top: 0px !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  right: 0px !important; }
+  /* line 8, ../compass/_project_view.scss */
+  .dialog.project-dialog .dialog-body {
+    width: 100%;
+    height: 100%; }
+  /* line 13, ../compass/_project_view.scss */
+  .dialog.project-dialog .title {
+    margin: 0;
+    font-size: 16px;
+    text-transform: uppercase; }
+  /* line 19, ../compass/_project_view.scss */
+  .dialog.project-dialog .content {
+    position: absolute;
+    top: 32px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px; }
+    /* line 26, ../compass/_project_view.scss */
+    .dialog.project-dialog .content .project-view {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0;
+      bottom: 0px; }
+    /* line 34, ../compass/_project_view.scss */
+    .dialog.project-dialog .content .project-controls {
+      margin-bottom: 20px; }
+      /* line 38, ../compass/_project_view.scss */
+      .dialog.project-dialog .content .project-controls .image-button .icon {
+        background-color: transparent; }
+    /* line 44, ../compass/_project_view.scss */
+    .dialog.project-dialog .content .log {
+      position: absolute;
+      top: 52px;
+      left: -1.25rem;
+      right: -1.25rem;
+      bottom: 0;
       overflow: auto;
-      margin-bottom: 6px;
-      cursor: pointer;
-      -webkit-transition: all 0.2s ease-in-out; }
-      /* line 49, ../compass/style.scss */
-      .charm.right-side .search-results .result .helper {
-        float: left;
-        width: 40px;
-        height: 40px;
-        border: 1px solid #fff;
-        margin-right: 10px;
-        overflow: hidden;
-        position: relative; }
-        /* line 57, ../compass/style.scss */
-        .charm.right-side .search-results .result .helper .img {
-          background-position: center;
-          background-size: cover;
+      background: #222;
+      font-family: MONOSPACE;
+      font-size: 11px; }
+      /* line 55, ../compass/_project_view.scss */
+      .dialog.project-dialog .content .log .log-background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0; }
+        /* line 61, ../compass/_project_view.scss */
+        .dialog.project-dialog .content .log .log-background .project-image {
           position: absolute;
           top: 0;
           bottom: 0;
           left: 0;
-          right: 0; }
-      /* line 68, ../compass/style.scss */
-      .charm.right-side .search-results .result .name {
-        font-size: 16px;
-        margin: 2px 0 4px; }
-      /* line 72, ../compass/style.scss */
-      .charm.right-side .search-results .result .port {
-        font-size: 12px; }
-      /* line 76, ../compass/style.scss */
-      .charm.right-side .search-results .result:hover {
-        background: #777; }
-  /* line 82, ../compass/style.scss */
-  .charm.right-side .about {
-    position: absolute;
-    bottom: 20px; }
-    /* line 85, ../compass/style.scss */
-    .charm.right-side .about .about-link {
-      color: #fff; }
-      /* line 87, ../compass/style.scss */
-      .charm.right-side .about .about-link:hover {
-        text-decoration: underline; }
+          right: 0;
+          background-position: center;
+          background-size: cover; }
+        /* line 70, ../compass/_project_view.scss */
+        .dialog.project-dialog .content .log .log-background .project-icon {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-left: -32px;
+          margin-top: -38px;
+          font-size: 64px;
+          opacity: 0.1;
+          transform: scale(2); }
+      /* line 82, ../compass/_project_view.scss */
+      .dialog.project-dialog .content .log .log-view {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px; }
+  /* line 94, ../compass/_project_view.scss */
+  .dialog.project-dialog p {
+    margin: 0;
+    line-height: 1.3; }
+  /* line 99, ../compass/_project_view.scss */
+  .dialog.project-dialog .dialog-close-button {
+    background-color: transparent;
+    color: white;
+    font-size: 37px;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: 0px 10px; }
 
-/* line 94, ../compass/style.scss */
-.charm-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100; }
+/* line 3, ../compass/_project_editor.scss */
+.charm.right-side .project-controls {
+  margin-bottom: 20px; }
+/* line 6, ../compass/_project_editor.scss */
+.charm.right-side .actions {
+  margin-top: 20px; }
 
-/* line 103, ../compass/style.scss */
-#charmSettings .button {
-  margin: 5px; }
-
-/* line 108, ../compass/style.scss */
-.input-control.text-file input[type="text"] {
-  width: 213px; }
-/* line 111, ../compass/style.scss */
-.input-control.text-file input[type="text"]:disabled {
-  width: 100%; }
-
-/* line 116, ../compass/style.scss */
-.input-control.text-image input[type="text"] {
-  width: 190px; }
-/* line 119, ../compass/style.scss */
-.input-control.text-image .button.clear {
-  padding: 0px 10px; }
-/* line 122, ../compass/style.scss */
-.input-control.text-image .button.file {
-  right: 35px;
-  padding: 0px 10px; }
-
-/* line 127, ../compass/style.scss */
-button.file {
-  overflow: hidden; }
-  /* line 129, ../compass/style.scss */
-  button.file input[type="file"] {
-    padding: 500px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: none;
-    cursor: pointer; }
-
-/* line 143, ../compass/style.scss */
-.group-of-buttons.schemeButtons .color {
+/* line 13, ../compass/_project_editor.scss */
+#charmEditor .group-of-buttons.schemeButtons .color {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0; }
-/* line 150, ../compass/style.scss */
-.group-of-buttons.schemeButtons .active {
+/* line 20, ../compass/_project_editor.scss */
+#charmEditor .group-of-buttons.schemeButtons .active {
   border: 3px solid #fff; }
-
-/* line 155, ../compass/style.scss */
-.dialog-overlay {
-  z-index: 1200; }
-  /* line 158, ../compass/style.scss */
-  .dialog-overlay.black-overlay {
-    background-color: rgba(0, 0, 0, 0.2); }
-
-/* line 162, ../compass/style.scss */
-.dialog {
-  z-index: 1201; }
-  /* line 164, ../compass/style.scss */
-  .dialog p {
-    margin-bottom: 10px; }
-  /* line 167, ../compass/style.scss */
-  .dialog p.small {
-    font-size: 0.8em; }
-  /* line 170, ../compass/style.scss */
-  .dialog .actions {
-    margin-top: 20px;
-    text-align: right; }
-    /* line 174, ../compass/style.scss */
-    .dialog .actions .button {
-      margin-left: 10px; }
-  /* line 179, ../compass/style.scss */
-  .dialog.big-dialog {
-    top: 20px !important;
-    bottom: 20px !important;
-    left: 20px !important;
-    right: 20px !important; }
-    /* line 185, ../compass/style.scss */
-    .dialog.big-dialog .title {
-      margin: 0;
-      font-size: 16px;
-      text-transform: uppercase; }
-    /* line 191, ../compass/style.scss */
-    .dialog.big-dialog .content {
-      position: fixed;
-      top: 58px;
-      bottom: 21px;
-      left: 21px;
-      right: 21px; }
-    /* line 199, ../compass/style.scss */
-    .dialog.big-dialog .log-file {
+/* line 25, ../compass/_project_editor.scss */
+#charmEditor .input-control {
+  height: auto; }
+  /* line 28, ../compass/_project_editor.scss */
+  #charmEditor .input-control input {
+    height: 2.125rem; }
+  /* line 33, ../compass/_project_editor.scss */
+  #charmEditor .input-control.text-file input[type="text"] {
+    width: 263px; }
+  /* line 36, ../compass/_project_editor.scss */
+  #charmEditor .input-control.text-file input[type="text"]:disabled {
+    width: 100%; }
+  /* line 42, ../compass/_project_editor.scss */
+  #charmEditor .input-control.text-image input[type="text"] {
+    width: 240px; }
+  /* line 45, ../compass/_project_editor.scss */
+  #charmEditor .input-control.text-image .button.clear {
+    padding: 0px 10px; }
+  /* line 48, ../compass/_project_editor.scss */
+  #charmEditor .input-control.text-image .button.file {
+    right: 35px;
+    padding: 0px 10px; }
+  /* line 54, ../compass/_project_editor.scss */
+  #charmEditor .input-control button.file {
+    overflow: hidden; }
+    /* line 56, ../compass/_project_editor.scss */
+    #charmEditor .input-control button.file input[type="file"] {
+      padding: 500px;
       position: absolute;
-      top: 16px;
+      top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      overflow: auto;
-      background: #222;
-      padding: 20px;
-      font-family: MONOSPACE;
-      font-size: 11px; }
-    /* line 212, ../compass/style.scss */
-    .dialog.big-dialog p {
-      margin: 0;
-      line-height: 1.3; }
-    /* line 217, ../compass/style.scss */
-    .dialog.big-dialog .dialog-close-button {
-      background-color: transparent;
-      color: white;
-      font-size: 37px;
-      width: auto;
-      height: auto;
-      min-height: 0;
-      padding: 0px 10px; }
+      border: none;
+      cursor: pointer; }
 
-/* line 229, ../compass/style.scss */
-::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
-  background: rgba(0, 0, 0, 0.4); }
+/* line 5, ../compass/_search.scss */
+.charm.right-side .search-results {
+  margin-top: 10px; }
+  /* line 7, ../compass/_search.scss */
+  .charm.right-side .search-results .result {
+    background: #555;
+    padding: 10px;
+    overflow: auto;
+    margin-bottom: 6px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in-out; }
+    /* line 15, ../compass/_search.scss */
+    .charm.right-side .search-results .result .helper {
+      float: left;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #fff;
+      margin-right: 10px;
+      overflow: hidden;
+      position: relative; }
+      /* line 23, ../compass/_search.scss */
+      .charm.right-side .search-results .result .helper .img {
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0; }
+    /* line 34, ../compass/_search.scss */
+    .charm.right-side .search-results .result .name {
+      font-size: 16px;
+      margin: 2px 0 4px; }
+    /* line 38, ../compass/_search.scss */
+    .charm.right-side .search-results .result .port {
+      font-size: 12px; }
+    /* line 42, ../compass/_search.scss */
+    .charm.right-side .search-results .result:hover {
+      background: #777; }
 
-/* line 234, ../compass/style.scss */
-::-webkit-scrollbar-thumb {
-  background: #333; }
-
-/* line 237, ../compass/style.scss */
-::-webkit-scrollbar-corner {
-  background: #000; }
+/* line 5, ../compass/_about.scss */
+.charm.right-side .about {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px; }
+  /* line 10, ../compass/_about.scss */
+  .charm.right-side .about .about-link {
+    width: 100%;
+    margin: 0 !important; }

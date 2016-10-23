@@ -1,0 +1,48 @@
+
+
+.charm.right-side {
+
+  .search-results {
+    margin-top: 10px;
+    .result {
+      background: #555;
+      padding: 10px;
+      overflow: auto;
+      margin-bottom: 6px;
+      cursor: pointer;
+      -webkit-transition: all 0.2s ease-in-out;
+
+      .helper {
+        float: left;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+        margin-right: 10px;
+        overflow: hidden;
+        position: relative;
+        .img {
+          background-position: center;
+          background-size: cover;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      }
+
+      .name {
+        font-size: 16px;
+        margin: 2px 0 4px;
+      }
+      .port {
+        font-size: 12px;
+      }
+
+      &:hover {
+        background: #777;
+      }
+    }
+  }
+
+}

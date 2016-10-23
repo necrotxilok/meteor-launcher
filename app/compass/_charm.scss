@@ -1,0 +1,25 @@
+
+.charm-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1051;
+  background: rgba(0,0,0,0.3);
+}
+
+#charmSettings .button {
+  margin: 5px;
+}
+
+.charm.right-side {
+  width: 350px;
+  right: -350px;
+  overflow: auto;
+
+  label {
+    display: block;
+    margin-top: 6px;
+  }
+}

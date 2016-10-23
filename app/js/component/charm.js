@@ -29,7 +29,7 @@
     this.close = function() {
       $('.charm-overlay').remove();
       $charm.animate({
-        right: -300
+        right: -350
       }, 200);
       _self.onClose();
     }

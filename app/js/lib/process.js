@@ -115,7 +115,7 @@
       var logMessage = function(message) {
         logs[project_id].push(message);
         //meteor.up.notify(message);
-        meteor.watch.notify(message);
+        meteor.watch.notify(message, project_id);
       }
 
       if (process.platform == 'win32') {
@@ -133,7 +133,7 @@
 
             logMessage('Launching ' + project.name + ' App...');
             logMessage('PORT: ' + project.port);
-            logMessage('URL: <a href="http://localhost:' + project.port + '/" class="open-project">http://localhost:' + project.port + '/</a>');
+            logMessage('URL: <a href="http://localhost:' + project.port + '/" class="open-external">http://localhost:' + project.port + '/</a>');
             logMessage('&nbsp;');
 
             meteor.proc.stdout.on('data', function (data) {
@@ -218,7 +218,7 @@
     this.getLog = function(project_id) {
       var log = logs[project_id];
       if (!log) {
-        log = ['This app has not been launched yet.'];
+        log = ['App ready to be launched!! ;)'];
       }
       return log;
     }

@@ -35,6 +35,7 @@
         dialog.close();
       });
       dialog.open();
+      charm.close();
     }
 
     var bindEvents = function() {

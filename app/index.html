@@ -29,22 +29,25 @@
     <script type="text/javascript" src="js/lib/file.js"></script>
     <script type="text/javascript" src="js/lib/process.js"></script>
     <script type="text/javascript" src="js/lib/template.js"></script>
+    <script type="text/javascript" src="js/lib/cmd.js"></script>
 
     <!-- Components -->
     <script type="text/javascript" src="js/component/charm.js"></script>
     <script type="text/javascript" src="js/component/dialog.js"></script>
-    <script type="text/javascript" src="js/component/tile.js"></script>
+    <script type="text/javascript" src="js/component/project_item.js"></script>
 
     <!-- User Interface -->
-    <script type="text/javascript" src="js/ui/project.js"></script>
+    <script type="text/javascript" src="js/ui/project_view.js"></script>
+    <script type="text/javascript" src="js/ui/project_editor.js"></script>
     <script type="text/javascript" src="js/ui/grid.js"></script>
+    <script type="text/javascript" src="js/ui/search.js"></script>
     <script type="text/javascript" src="js/ui/settings.js"></script>
 
   </head>
   <body class="tile-area-scheme-dark">
     <div class="charm right-side padding20 bg-grayDark" id="charmEditor">
         <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
-        <h1 class="text-light">Project</h1>
+        <h1 class="text-light charm-title">Project</h1>
         <hr class="thin">
         <br>
         <div class="charm-content-container"></div>
@@ -52,7 +55,7 @@
 
     <div class="charm right-side padding20 bg-grayDark" id="charmSearch">
         <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
-        <h1 class="text-light">Search</h1>
+        <h1 class="text-light">Search Project</h1>
         <hr class="thin">
         <br>
         <div class="input-control text full-size">
@@ -62,34 +65,35 @@
         <div class="search-results"></div>
     </div>
 
-    <div class="charm right-side padding20 bg-grayDark" id="charmSettings" style="right: -300px;">
+    <div class="charm right-side padding20 bg-grayDark" id="charmSettings">
         <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
-        <h1 class="text-light">Settings</h1>
+        <h1 class="text-light">General Settings</h1>
         <hr class="thin">
         <br>
-        <div class="about"><a href="#" class="about-link">About...</a></div>
+        <div class="about"><a href="#" class="button bg-grayLight bg-active-gray about-link">About...</a></div>
     </div>
 
-    <div class="tile-area fg-white tile-area-scheme-dark">
-        <h1 class="tile-area-title"><img src="img/meteor_launcher.png"> Meteor Launcher</h1>
-        <div class="tile-area-controls">
-            <!--
-            <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">Sergey Pimenov</span> <span class="icon mif-user"></span></button>
-            -->
-            <button class="add-project square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmEditor" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Add new project"><span class="mif-plus"></span></button>
-            <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSearch" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Search project"><span class="mif-search"></span></button>
-            <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSettings" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Settings"><span class="mif-cog"></span></button>
-            <!--
-            <a href="#" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
-            -->
+    <div class="app-container">
+        <div class="tile-area fg-white tile-area-scheme-dark">
+            <h1 class="tile-area-title"><img src="img/meteor_launcher.png"> Meteor Launcher</h1>
+            <div class="tile-area-controls">
+                <!--
+                <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">Sergey Pimenov</span> <span class="icon mif-user"></span></button>
+                -->
+                <button class="add-project square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmEditor" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Add new project"><span class="mif-plus"></span></button>
+                <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSearch" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Search project"><span class="mif-search"></span></button>
+                <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSettings" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="General Settings"><span class="mif-cog"></span></button>
+                <!--
+                <a href="#" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
+                -->
+            </div>
+
+            <ul id="grid" class="grid">
+              <li class="position-highlight">
+                <div class="inner"></div>
+              </li>
+            </ul>
         </div>
-
-        <ul id="grid" class="grid">
-          <li class="position-highlight">
-            <div class="inner"></div>
-          </li>
-        </ul>
-
     </div>
 
   </body>

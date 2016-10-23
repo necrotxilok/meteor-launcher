@@ -1,0 +1,26 @@
+
+.dialog-overlay {
+  //z-index: 1200;
+
+  &.black-overlay {
+    background-color: rgba(0,0,0,0.2);
+  }
+}
+
+.dialog {
+  //z-index: 1201;
+  p {
+    margin-bottom: 10px;
+  }
+  p.small {
+    font-size: 0.8em;
+  }
+  .actions {
+    margin-top: 20px;
+    text-align: right;
+
+    .button {
+      margin-left: 10px; 
+    }
+  }
+}

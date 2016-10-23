@@ -77,6 +77,3 @@
   App.TplManager = new Template();
 
 })(document, window, jQuery);
-
-
-

@@ -1,0 +1,146 @@
+
+.grid {
+  .item {
+
+    // Project Items
+    //----------------------------------------------------
+
+    .controls {
+      position: absolute;
+      top: 0;
+      font-size: 0.4em;
+      font-weight: normal;
+      line-height: 1em;
+      opacity: 0;
+      -webkit-transition: opacity 0.2s;
+
+      &.left {
+        left: 0;
+      }
+      &.right {
+        right: 0;
+      }
+    }
+    &:hover {
+      .controls {
+        opacity: 1;
+      }
+    }
+
+    a {
+      font-size: 0.6em;
+      float: left;
+      padding: 5px 6px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .project-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -32px;
+      margin-top: -38px;
+      font-size: 64px;
+      opacity: 0.1;
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    // Project Tile Sizes
+    //----------------------------------------------------
+
+    .tile-wide, .tile-large {
+    }
+
+    .tile-large {
+      .project-icon {
+        transform: scale(2);
+      }
+    }
+
+    // Project Item States
+    //----------------------------------------------------
+
+    // IDLE (Default)
+    .project-idle {
+      display: block;
+    }
+    .project-launched {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background: rgba(0,0,0,0.6);
+      padding-bottom: 6px;
+      border: 3px solid #60a917;
+
+      .launch-title {
+        padding: 3px;
+        padding-left: 10px;
+        font-size: 11px;
+        //background: #60a917;
+      }
+      .controls {
+        top: 20px;
+        left: 6px;
+      }
+    }
+
+    // LAUNCHED
+    &.state-launched {
+      .project-launched {
+        display: block;
+      }
+      .project-idle {
+        display: none;
+      }
+    }
+
+    // ERROR
+    &.state-error {
+
+    }
+
+    // EXITED
+    &.state-exited {
+
+    }
+  }
+}
+
+.inner .tile {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+
+  .tile-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .tile-label {
+    font-size: 0.4em;
+  }
+}
+
+/*
+.tile, .tile-small, .tile-sqaure, .tile-wide, .tile-large, .tile-big, .tile-super {
+  opacity: 0;
+  -webkit-transform: scale(.8);
+  transform: scale(.8);
+}
+*/
