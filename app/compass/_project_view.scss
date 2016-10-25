@@ -47,7 +47,6 @@
       left: -1.25rem;
       right: -1.25rem;
       bottom: 0;
-      overflow: auto;
       background: #222;
       font-family: MONOSPACE;
       font-size: 11px;
@@ -87,6 +86,7 @@
         right: 0;
         background-color: rgba(0,0,0,0.6);
         padding: 20px;
+        overflow: auto;
       }
     }
   }

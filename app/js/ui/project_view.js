@@ -113,6 +113,9 @@
         $log.append('<p>' + line + '</p>');
       });
       
+      var scrollHeight = $log.get(0).scrollHeight;
+      $log.animate({'scrollTop': scrollHeight}, 500);
+
       $controls = dialog.find('.project-controls');
 
       if (App.Process.isRunning(project_id)) {

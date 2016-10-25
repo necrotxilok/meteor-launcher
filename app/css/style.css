@@ -37,6 +37,13 @@ body {
 ::-webkit-scrollbar-corner {
   background: #000; }
 
+/* line 40, ../compass/_base.scss */
+.hint2.line {
+  padding: 4px;
+  display: block;
+  max-width: 100%;
+  margin: 0px 0px 0px; }
+
 /* line 2, ../compass/_charm.scss */
 .charm-overlay {
   position: absolute;
@@ -48,15 +55,11 @@ body {
   background: rgba(0, 0, 0, 0.3); }
 
 /* line 12, ../compass/_charm.scss */
-#charmSettings .button {
-  margin: 5px; }
-
-/* line 16, ../compass/_charm.scss */
 .charm.right-side {
   width: 350px;
   right: -350px;
   overflow: auto; }
-  /* line 21, ../compass/_charm.scss */
+  /* line 17, ../compass/_charm.scss */
   .charm.right-side label {
     display: block;
     margin-top: 6px; }
@@ -154,7 +157,7 @@ body {
     left: 0; }
   /* line 20, ../compass/_project_item.scss */
   .grid .item .controls.right {
-    right: 0; }
+    right: 1px; }
 /* line 25, ../compass/_project_item.scss */
 .grid .item:hover .controls {
   opacity: 1; }
@@ -280,18 +283,17 @@ body {
       left: -1.25rem;
       right: -1.25rem;
       bottom: 0;
-      overflow: auto;
       background: #222;
       font-family: MONOSPACE;
       font-size: 11px; }
-      /* line 55, ../compass/_project_view.scss */
+      /* line 54, ../compass/_project_view.scss */
       .dialog.project-dialog .content .log .log-background {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0; }
-        /* line 61, ../compass/_project_view.scss */
+        /* line 60, ../compass/_project_view.scss */
         .dialog.project-dialog .content .log .log-background .project-image {
           position: absolute;
           top: 0;
@@ -300,7 +302,7 @@ body {
           right: 0;
           background-position: center;
           background-size: cover; }
-        /* line 70, ../compass/_project_view.scss */
+        /* line 69, ../compass/_project_view.scss */
         .dialog.project-dialog .content .log .log-background .project-icon {
           position: absolute;
           top: 50%;
@@ -310,7 +312,7 @@ body {
           font-size: 64px;
           opacity: 0.1;
           transform: scale(2); }
-      /* line 82, ../compass/_project_view.scss */
+      /* line 81, ../compass/_project_view.scss */
       .dialog.project-dialog .content .log .log-view {
         position: absolute;
         top: 0;
@@ -318,7 +320,8 @@ body {
         left: 0;
         right: 0;
         background-color: rgba(0, 0, 0, 0.6);
-        padding: 20px; }
+        padding: 20px;
+        overflow: auto; }
   /* line 94, ../compass/_project_view.scss */
   .dialog.project-dialog p {
     margin: 0;
@@ -426,13 +429,13 @@ body {
     .charm.right-side .search-results .result:hover {
       background: #777; }
 
-/* line 5, ../compass/_about.scss */
-.charm.right-side .about {
+/* line 4, ../compass/_settings.scss */
+#charmSettings .about {
   position: absolute;
   bottom: 20px;
   left: 20px;
   right: 20px; }
-  /* line 10, ../compass/_about.scss */
-  .charm.right-side .about .about-link {
-    width: 100%;
-    margin: 0 !important; }
+  /* line 9, ../compass/_settings.scss */
+  #charmSettings .about .about-link {
+    border: none;
+    width: 100%; }

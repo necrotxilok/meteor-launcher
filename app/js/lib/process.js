@@ -223,6 +223,15 @@
       return log;
     }
 
+    this.stopAll = function() {
+      _.each(procs, function(proc, project_id) {
+        if (project_id) {
+          stopMeteorApp(proc);
+          delete procs[project_id];
+        }
+      });
+    }
+
     // == INITIALIZE ==============================================================
 
     bindEvents();

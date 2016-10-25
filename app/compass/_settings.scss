@@ -1,6 +1,5 @@
 
-
-.charm.right-side {
+#charmSettings {
 
   .about {
     position: absolute;
@@ -9,8 +8,8 @@
     right: 20px;
     .about-link {
       //color: #fff;
+      border: none;
       width: 100%;
-      margin: 0 !important;
     }
   }
 

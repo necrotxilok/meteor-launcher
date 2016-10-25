@@ -71,10 +71,10 @@
         event.preventDefault();
         var $this = $(event.currentTarget);
         var project_id = $this.data('project-id');
+        _self.charm.close();
         var dialog = new Dialog('Remove Project', '<p>¿Are you sure you want to remove this project? There is no undo.</p><p class="small">This will only remove the project from Meteor Launcher. All project files will be kept in its folder.</p><div class="actions"><button class="button confirm bg-red bg-active-darkRed fg-white">Remove</button><button class="button cancel bg-grayLight bg-active-gray fg-white">Cancel</button></div>');
         dialog.on('click', '.confirm', function(event) {
           dialog.close();
-          _self.charm.close();
           removeProject(activeProject);          
         });
         dialog.on('click', '.cancel', function(event) {

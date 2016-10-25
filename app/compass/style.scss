@@ -1,14 +1,14 @@
 
-@import 'base';
+@import '_base.scss';
 
-@import 'charm';
-@import 'dialog';
+@import '_charm.scss';
+@import '_dialog.scss';
 
-@import 'grid';
+@import '_grid.scss';
 
-@import 'project_item';
-@import 'project_view';
-@import 'project_editor';
+@import '_project_item.scss';
+@import '_project_view.scss';
+@import '_project_editor.scss';
 
-@import 'search';
-@import 'about';
+@import '_search.scss';
+@import '_settings.scss';
