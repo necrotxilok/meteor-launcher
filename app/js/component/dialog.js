@@ -38,6 +38,10 @@
       $dialog.find('.dialog-close-button').click();
     }
 
+    this.render = function(content) {
+      $dialog.find('.dialog-body .content').html(content);
+    }
+
     this.on = function(eventName, target, callback) {
       $dialog.on(eventName, target, callback);
     }
@@ -45,6 +49,13 @@
     this.find = function(selector) {
       return $dialog.find(selector);
     }
+
+    this.$el = $dialog;
+
+    // Stop Propagation
+    $dialog.mousewheel(function(event) {
+      event.stopPropagation();
+    });
 
     return this;
   }

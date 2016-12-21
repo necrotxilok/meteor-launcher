@@ -1,5 +1,5 @@
 /*
- *  Project UI
+ *  Project Editor UI
  * ------------------------------------------------
  *  @Author:    necro_txilok
  *  @Date:      2015-07-24
@@ -11,7 +11,7 @@
   var tplManager = App.TplManager;
   var Dialog = App.Components.Dialog;
 
-  var ProjectUI = function() {
+  var ProjectEditorUI = function() {
 
     // == PRIVATE ==============================================================
    
@@ -23,8 +23,8 @@
 
     var edit = false;
 
-    var editorTpl = tplManager.get('editor');
-    var messageTpl = tplManager.render('<div class="line validator-hint bg-red fg-white hint2" style="min-width: 0px; position: relative; width: 260px; z-index: 100;">{{message}}</div>');
+    var editorTpl = tplManager.get('project_editor');
+    var messageTpl = tplManager.render('<div class="line validator-hint bg-red fg-white hint2" style="position: relative; z-index: 100;">{{message}}</div>');
 
     var findProject = function(project_id) {
       return _.findWhere(App.projects, {id: project_id});
@@ -58,23 +58,23 @@
           $editor.find('#projectPort').keyup();
         }
       });
-      $editor.on('click', '.button-play', function(event) {
+      /*$editor.on('click', '.button-play', function(event) {
         event.preventDefault();
         projectItemView.play();
         _self.charm.close();
-      });
-      $editor.on('click', '.button-log', function(event) {
+      });*/
+      /*$editor.on('click', '.button-log', function(event) {
         event.preventDefault();
         projectItemView.viewLog();
-      });
+      });*/
       $editor.on('click', '.button-remove', function(event) {
         event.preventDefault();
         var $this = $(event.currentTarget);
         var project_id = $this.data('project-id');
+        _self.charm.close();
         var dialog = new Dialog('Remove Project', '<p>¿Are you sure you want to remove this project? There is no undo.</p><p class="small">This will only remove the project from Meteor Launcher. All project files will be kept in its folder.</p><div class="actions"><button class="button confirm bg-red bg-active-darkRed fg-white">Remove</button><button class="button cancel bg-grayLight bg-active-gray fg-white">Cancel</button></div>');
         dialog.on('click', '.confirm', function(event) {
           dialog.close();
-          _self.charm.close();
           removeProject(activeProject);          
         });
         dialog.on('click', '.cancel', function(event) {
@@ -156,8 +156,7 @@
         var port = getPortValue($this);
 
         if (port) {
-          setProjectAttr('port', port);
-          setProjectItem('Port', port);
+          setProject('port', port);
         }
       });
       $editor.on('click', '.schemeButtons .square-button', function(event) {
@@ -165,8 +164,7 @@
         var color = $this.data('scheme');
 
         if (color) {
-          setProjectAttr('color', color);
-          setProjectItem('Color', color);
+          setProject('color', color);
         }
       });
       $editor.on('keyup', '#projectImageText', function(event) {
@@ -174,10 +172,9 @@
         var image = $this.val().trim();
 
         if (image) {
-          setProjectAttr('image', image);
-          setProjectItem('Image', image);
+          setProject('image', image);
         } else {
-          setProjectItem('Image');
+          setProject('image');
         }
       });
       $editor.on('change', '#projectImage', function(event) {
@@ -185,18 +182,23 @@
         var image = $this.val().trim();
 
         if (image) {
-          setProjectAttr('image', image);
+          setProject('image', image);
           $editor.find('#projectImageText').val(image);
-          setProjectItem('Image', image);
         } else {
-          setProjectItem('Image');
+          setProject('image');
+          $editor.find('#projectImageText').val('');
         }
       });
       $editor.on('click', '#projectImageClear', function(event) {
-        setProjectAttr('image', '');
+        setProject('image');
         $editor.find('#projectImageText').val('');
-        setProjectItem('Image');
       });
+    }
+
+    var setProject = function(attr, value) {
+      var property = attr.substr(0,1).toUpperCase() + attr.substr(1);
+      setProjectAttr(attr, value);
+      setProjectItem(property, value);
     }
 
     var setProjectAttr = function(attr, value) {
@@ -209,6 +211,7 @@
     var setProjectItem = function(property, value) {
       if (projectItemView) {
         projectItemView['set' + property](value);
+        App.UI.ProjectView.redraw();
       }
     }
 
@@ -237,6 +240,8 @@
         project: activeProject
       }));
 
+      $editor.find('.charm-title').html('Add Project');
+
       $editor.find('.schemeButtons .square-button.' + activeProject.color).addClass('active');
     }
 
@@ -251,6 +256,8 @@
         project_id: project_id,
         project: activeProject
       }));
+
+      $editor.find('.charm-title').html('Project Settings');
 
       $editor.find('.schemeButtons .square-button.' + activeProject.color).addClass('active');
       //$editor.find('.button-stop').hide();
@@ -277,7 +284,7 @@
 
   $(function() {
     App.UI = App.UI || {};
-    App.UI.Project = new ProjectUI();
+    App.UI.ProjectEditor = new ProjectEditorUI();
   });
 
 })(document, window, jQuery);

@@ -1,0 +1,30 @@
+<li class="item project-item" data-id="{{item.id}}">
+  <div class="inner">
+    <div class="tile {{tileClass}} {{item.color}}" data-role="tile">
+      
+      <div class="tile-content iconic" {{#if item.image}}style="background-image:url('{{image_url}}')"{{/if}}></div>
+      <div class="project-icon {{#if item.image}}hidden{{/if}}"><span class="icon mif-rocket"></span></div>
+      
+      <span class="tile-label">{{item.name}}</span>
+      
+      <div class="project-launched">
+        <div class="launch-title">Project launched</div>
+        <div class="controls left">
+          <a href="#" class="stop"><span class="icon mif-stop"></span></a>
+          <a href="http://localhost:{{item.port}}" class="open"><span class="icon mif-earth"></span></a>
+        </div>
+      </div>
+      
+      <div class="project-idle controls left">
+        <a href="#" class="settings"><span class="icon mif-cog"></span></a>
+        <a href="#" class="play"><span class="icon mif-play"></span></a>
+        <!--<span class="view-port">{{item.port}}</span>-->
+      </div>
+      
+      <div class="project-zoom controls right">
+        <a href="#zoomPlus" class="action resize"><span class="icon mif-enlarge2"></span></a>
+      </div>
+
+    </div>
+  </div>
+</li>

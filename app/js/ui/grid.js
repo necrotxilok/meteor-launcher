@@ -9,7 +9,7 @@
 (function(document, window, $, undefined) {
   'use strict';
 
-  var Tile = App.Components.Tile;
+  var ProjectItem = App.Components.ProjectItem;
 
   var tplManager = App.TplManager;
 
@@ -18,8 +18,6 @@
     // == PRIVATE ==============================================================
    
     var _self = this;
-    var searchContainer = '#charmSearch';
-    var $search = $(searchContainer);
     var $grid = $('#grid');
 
     var currentSize = 3;
@@ -28,7 +26,7 @@
 
     var buildElements = function(projects) {
       _.each(projects, function(project) {
-        items[project.id] = new Tile($grid, project);
+        items[project.id] = new ProjectItem($grid, project);
       });
     }
     
@@ -94,76 +92,19 @@
       $(window).trigger('resize');
 
       $("body").mousewheel(function(event, delta, deltaX, deltaY){
-          var page = $(document);
+          var page = $('.app-container');
           var scroll_value = delta * 50;
           page.scrollLeft(page.scrollLeft() - scroll_value);
-          //return false;
+          return false;
       });
     }
 
-    var bindSearchEvents = function() {
-      $search.on('keyup', '.input-search', _.debounce(function(event) {
-        var $this = $(event.currentTarget);
-        var $results = $search.find('.search-results');
-        var searchText = $this.val();
-
-        if (searchText) {
-
-          var filteredProjects = _.filter(App.projects, function(project) {
-            if (project.name.match(new RegExp(searchText, 'i'))) {
-              return true;
-            }
-            if (project.port.toString().match(new RegExp(searchText, 'i'))) {
-              return true;
-            }
-            return false;
-          });
-
-          $results.empty();
-
-          if (filteredProjects.length) {
-            _.each(filteredProjects, function(project) {
-              var $res = $('<div/>').append('<div class="result" data-id="' + project.id + '"><div class="helper ' + project.color + '"></div><div class="name">' + project.name + '</div><div class="port">' + project.port + '</div></div>');
-              if (project.image) {
-                console.log(project.image);
-                var image_url = 'file://' + project.image.replace(/\\/g, '/');
-                $res.find('.helper').append('<div class="img" style="background-image: url(' + image_url + ');"></div>');
-              }
-              $results.append($res.html());
-            });
-          } else {
-            $results.html('<p>Not found!</p>');
-          }
-
-        } else {
-          $results.empty();
-        }
-
-      }, 300));
-  
-      $search.on('click', '.result', function(event) {
-        event.preventDefault();
-        var $this = $(event.currentTarget);
-        var project_id = $this.data('id');
-
-        _self.charm.close();
-        App.UI.Project.openEditProject(project_id);
-      });
-
-    }
 
 
     // == PUBLIC ==============================================================
 
-    this.charm = new App.Components.Charm(searchContainer);
-    this.charm.onClose = function() {
-      $search.find('.input-search').val('');
-      $search.find('.search-results').empty();
-    }
-
-
     this.addItem = function(project) {
-      items[project.id] = new Tile($grid, project);
+      items[project.id] = new ProjectItem($grid, project);
       render();
     }
 
@@ -184,8 +125,6 @@
 
     render();
     bindEvents();
-
-    bindSearchEvents();
 
     return this;
   }

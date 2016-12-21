@@ -1,0 +1,68 @@
+
+.charm.right-side {
+  .project-controls {
+    margin-bottom: 20px;
+  }
+  .actions {
+    margin-top: 20px;
+  }
+}
+
+#charmEditor {
+  .group-of-buttons.schemeButtons {
+    .color {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .active {
+      border: 3px solid #fff;
+    }
+  }
+
+  .input-control {
+    height: auto;
+
+    input {
+      height: 2.125rem;
+    }
+
+    &.text-file {
+      input[type="text"] {
+        width: 263px;
+      }
+      input[type="text"]:disabled {
+        width: 100%;
+      }
+    }
+
+    &.text-image {
+      input[type="text"] {
+        width: 240px;
+      }
+      .button.clear {
+        padding: 0px 10px;
+      }
+      .button.file {
+        right: 35px;
+        padding: 0px 10px;
+      }
+    }
+
+    button.file {
+      overflow: hidden;
+      input[type="file"] {
+        padding: 500px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: none;
+        cursor: pointer;   
+      }
+    }
+  }
+}

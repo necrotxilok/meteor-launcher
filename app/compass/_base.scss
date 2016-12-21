@@ -1,0 +1,45 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  .app-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: auto;
+  }
+}
+
+.main {
+  padding: 10px;
+}
+
+.image-button {
+  padding: 0 1rem 0 2.125rem;
+  .icon {
+    background-color: transparent;
+  }
+}
+
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: rgba(0,0,0, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
+::-webkit-scrollbar-corner {
+  background: #000;
+}
+
+.hint2.line {
+  padding: 4px;
+  display: block;
+  max-width: 100%;
+  margin: 0px 0px 0px;
+}

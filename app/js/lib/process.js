@@ -14,7 +14,7 @@
     // == PRIVATE ==============================================================
     var fs = require('fs');
     var exec = require('child_process').exec;
-    
+
     var procs = {};
     var logs = {};
 
@@ -113,9 +113,13 @@
       };
 
       var logMessage = function(message) {
+        message = message.replace(/\[[0-9]{2}m/g, '');
+        message = message.replace(/W.*?\(STDERR\)\s*/g, 'ERR > ').trim();
+        message = message.replace(/I.*?\)\?\s*/g, 'LOG > ').trim();
+        message = message.replace(/(?:\r\n|\r|\n)/g, '<p></p>');
         logs[project_id].push(message);
         //meteor.up.notify(message);
-        meteor.watch.notify(message);
+        meteor.watch.notify(message, project_id);
       }
 
       if (process.platform == 'win32') {
@@ -130,16 +134,16 @@
         if (freeFolder(project.folder)) {
           if (freePort(project.port)) {
             meteor.proc = exec(execFile + ' -p ' + project.port, {cwd: project.folder});
+            meteor.c_procs = getAllChildrenProcesses(meteor.proc.pid);
 
             logMessage('Launching ' + project.name + ' App...');
             logMessage('PORT: ' + project.port);
-            logMessage('URL: <a href="http://localhost:' + project.port + '/" class="open-project">http://localhost:' + project.port + '/</a>');
+            logMessage('URL: <a href="http://localhost:' + project.port + '/" class="open-external">http://localhost:' + project.port + '/</a>');
             logMessage('&nbsp;');
 
             meteor.proc.stdout.on('data', function (data) {
               //console.log('>', data);
               if (data.match('App running')) {
-                meteor.c_procs = getAllChildrenProcesses(meteor.proc.pid);
                 logMessage('&nbsp;');
                 logMessage('Meteor App started!!');
                 //meteor.up.resolve();
@@ -218,9 +222,18 @@
     this.getLog = function(project_id) {
       var log = logs[project_id];
       if (!log) {
-        log = ['This app has not been launched yet.'];
+        log = ['App ready to be launched!! ;)'];
       }
       return log;
+    }
+
+    this.stopAll = function() {
+      _.each(procs, function(proc, project_id) {
+        if (project_id) {
+          stopMeteorApp(proc);
+          delete procs[project_id];
+        }
+      });
     }
 
     // == INITIALIZE ==============================================================
