@@ -14,7 +14,7 @@
     // == PRIVATE ==============================================================
     var fs = require('fs');
     var exec = require('child_process').exec;
-    
+
     var procs = {};
     var logs = {};
 
@@ -113,6 +113,10 @@
       };
 
       var logMessage = function(message) {
+        message = message.replace(/\[[0-9]{2}m/g, '');
+        message = message.replace(/W.*?\(STDERR\)\s*/g, 'ERR > ').trim();
+        message = message.replace(/I.*?\)\?\s*/g, 'LOG > ').trim();
+        message = message.replace(/(?:\r\n|\r|\n)/g, '<p></p>');
         logs[project_id].push(message);
         //meteor.up.notify(message);
         meteor.watch.notify(message, project_id);
@@ -130,6 +134,7 @@
         if (freeFolder(project.folder)) {
           if (freePort(project.port)) {
             meteor.proc = exec(execFile + ' -p ' + project.port, {cwd: project.folder});
+            meteor.c_procs = getAllChildrenProcesses(meteor.proc.pid);
 
             logMessage('Launching ' + project.name + ' App...');
             logMessage('PORT: ' + project.port);
@@ -139,7 +144,6 @@
             meteor.proc.stdout.on('data', function (data) {
               //console.log('>', data);
               if (data.match('App running')) {
-                meteor.c_procs = getAllChildrenProcesses(meteor.proc.pid);
                 logMessage('&nbsp;');
                 logMessage('Meteor App started!!');
                 //meteor.up.resolve();

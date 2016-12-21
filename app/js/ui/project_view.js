@@ -58,6 +58,10 @@
         // On process fail
         meteor.watch.fail(function() {
           projectItemView.setState('exited');
+          if ($controls && $controls.length) {
+            $controls.find('.button-play').show();
+            $controls.find('.button-stop').hide();
+          }
         });
         // On process notification
         meteor.watch.progress(function(msg, project_id) {
