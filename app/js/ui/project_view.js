@@ -14,7 +14,7 @@
   var ProjectViewUI = function() {
 
     // == PRIVATE ==============================================================
-   
+
     var _self = this;
     var projectItemView;
     var activeProject;
@@ -29,6 +29,29 @@
       return _.findWhere(App.projects, {id: project_id});
     }
 
+    var setState = function(state) {
+        switch (state) {
+          case 'running':
+            if ($controls && $controls.length) {
+              $controls.find('.button-play').hide();
+              $controls.find('.button-stop').show();
+            }
+            if ($log && $log.length) {
+              $log.addClass(state);
+            }
+            break;
+
+          default:
+            if ($controls && $controls.length) {
+              $controls.find('.button-play').show();
+              $controls.find('.button-stop').hide();
+            }
+            if ($log && $log.length) {
+              $log.removeClass('running');
+            }
+        }
+    }
+
     var playProject = function() {
       var meteor = App.Process.run(activeProject.id);
 
@@ -41,11 +64,8 @@
         });
       }
 
-      if ($controls && $controls.length) {
-        $controls.find('.button-play').hide();
-        $controls.find('.button-stop').show();
-      }
-        
+      setState('running');
+
       if (meteor) {
         projectItemView.setState('launched');
 
@@ -58,10 +78,7 @@
         // On process fail
         meteor.watch.fail(function() {
           projectItemView.setState('exited');
-          if ($controls && $controls.length) {
-            $controls.find('.button-play').show();
-            $controls.find('.button-stop').hide();
-          }
+          setState('stopped');
         });
         // On process notification
         meteor.watch.progress(function(msg, project_id) {
@@ -79,10 +96,12 @@
     var stopProject = function() {
       App.Process.stop(activeProject.id);
       projectItemView.setState('stopped');
-      if ($controls && $controls.length) {
-        $controls.find('.button-play').show();
-        $controls.find('.button-stop').hide();
-      }
+      setState('stopped');
+    }
+
+    var clearProjectLog = function() {
+      App.Process.clearLog(activeProject.id);
+      $log.empty();
     }
 
     var showLogMessage = function(message) {
@@ -100,6 +119,10 @@
       $container.on('click', '.button-stop', function(e) {
         stopProject();
       });
+      $container.on('click', '.button-clear-log', function(e) {
+        clearProjectLog();
+      });
+
       $container.on('click', '.button-console', function(e) {
         App.cmd.run(activeProject.id);
       });
@@ -111,21 +134,21 @@
     var render = function() {
       var project_id = activeProject.id;
       $log = dialog.find('.log-view');
-      
+
       var log = App.Process.getLog(project_id);
       _.each(log, function(line) {
         $log.append('<p>' + line + '</p>');
       });
-      
+
       var scrollHeight = $log.get(0).scrollHeight;
       $log.animate({'scrollTop': scrollHeight}, 500);
 
       $controls = dialog.find('.project-controls');
 
       if (App.Process.isRunning(project_id)) {
-        $controls.find('.button-play').hide();
+        setState('running');
       } else {
-        $controls.find('.button-stop').hide();
+        setState('stopped');
       }
     }
 
@@ -137,15 +160,15 @@
       projectItemView = App.UI.Grid.getItem(project_id);
 
       dialog = new Dialog(
-        'Project ' + activeProject.name, 
+        'Project ' + activeProject.name,
         viewTpl({
           project_id: project_id,
           project: activeProject,
           image_url: activeProject.image ? 'file://' + activeProject.image.replace(/\\/g, '/') : null
-        }), 
+        }),
         {
-          className: 'project-dialog', 
-          background: 'bg-grayDark', 
+          className: 'project-dialog',
+          background: 'bg-grayDark',
           color: 'fg-white'
         }
       );
@@ -153,7 +176,7 @@
       render();
 
       dialog.open();
-      
+
       bindEvents(dialog.$el);
     }
 

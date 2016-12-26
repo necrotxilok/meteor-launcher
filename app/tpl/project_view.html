@@ -2,8 +2,13 @@
   <div class="project-controls" data-project-id="{{project_id}}">
     <button class="image-button button-play bg-green bg-active-darkGreen fg-white">Run<span class="icon mif-play"></span></button>
     <button class="image-button button-stop bg-gray bg-active-grayDarker fg-white">Stop<span class="icon mif-stop"></span></button>
+    <button class="image-button button-clear-log bg-grayLight bg-active-gray fg-white">Clear<span class="icon mif-file-empty"></span></button>
     <button class="image-button button-console bg-grayLight bg-active-gray fg-white">Console<span class="icon mif-chevron-thin-right"></span></button>
-    <button class="image-button button-edit bg-lightBlue bg-active-blue fg-white place-right">Settings<span class="icon mif-cog"></span></button>
+    <div class="place-right">
+      <button class="image-button button-packages bg-grayLight bg-active-gray fg-white">Packages<span class="icon mif-list"></span></button>
+      <button class="image-button button-platforms bg-grayLight bg-active-gray fg-white">Platforms<span class="icon mif-phonelink"></span></button>
+      <button class="image-button button-edit bg-lightBlue bg-active-blue fg-white">Settings<span class="icon mif-cog"></span></button>
+    </div>
   </div>
   <div class="log">
     <div class="log-background {{project.color}}">

@@ -222,9 +222,13 @@
     this.getLog = function(project_id) {
       var log = logs[project_id];
       if (!log) {
-        log = ['App ready to be launched!! ;)'];
+        log = [];
       }
       return log;
+    }
+
+    this.clearLog = function(project_id) {
+      logs[project_id] = [];
     }
 
     this.stopAll = function() {

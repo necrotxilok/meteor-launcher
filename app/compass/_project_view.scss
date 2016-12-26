@@ -7,7 +7,7 @@
 
   .dialog-body {
     width: 100%;
-    height: 100%;    
+    height: 100%;
   }
 
   .title {
@@ -87,13 +87,18 @@
         background-color: rgba(0,0,0,0.6);
         padding: 20px;
         overflow: auto;
+        border: 3px solid transparent;
+
+        &.running {
+            border: 3px solid #60a917;
+        }
       }
     }
   }
 
   p {
     margin: 0;
-    line-height: 1.3;      
+    line-height: 1.3;
   }
 
   .dialog-close-button {
