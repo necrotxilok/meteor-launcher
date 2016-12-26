@@ -77,6 +77,16 @@
       fs.writeFile(projectsFile, JSON.stringify(App.projects));
     }, 1000);
 
+    this.getMeteorVersion = function(projectPath) {
+      var meteorVersionFile = projectPath + DS + '.meteor/release';
+
+      if (fs.existsSync(meteorVersionFile)) {
+        return fs.readFileSync(meteorVersionFile).toString();
+      } else {
+        return '<span class="icon mif-warning"></span> Current project is not configured in a correct Meteor project directory! Please review if the path exists and have the correct files to run a Meteor Application.';
+      }
+    }
+
     return this;
   }
 

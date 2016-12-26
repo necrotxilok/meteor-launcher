@@ -326,11 +326,21 @@ body {
         /* line 92, ../compass/_project_view.scss */
         .dialog.project-dialog .content .log .log-view.running {
           border: 3px solid #60a917; }
-  /* line 99, ../compass/_project_view.scss */
+    /* line 98, ../compass/_project_view.scss */
+    .dialog.project-dialog .content .meteor-info {
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      font-size: 9px; }
+      /* line 104, ../compass/_project_view.scss */
+      .dialog.project-dialog .content .meteor-info .icon {
+        float: left;
+        margin-right: 4px; }
+  /* line 111, ../compass/_project_view.scss */
   .dialog.project-dialog p {
     margin: 0;
     line-height: 1.3; }
-  /* line 104, ../compass/_project_view.scss */
+  /* line 116, ../compass/_project_view.scss */
   .dialog.project-dialog .dialog-close-button {
     background-color: transparent;
     color: white;

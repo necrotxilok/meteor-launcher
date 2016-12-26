@@ -150,6 +150,9 @@
       } else {
         setState('stopped');
       }
+
+      var $meteorInfo = dialog.find('.meteor-info');
+      $meteorInfo.html(App.File.getMeteorVersion(activeProject.folder));
     }
 
 

@@ -94,6 +94,18 @@
         }
       }
     }
+
+    .meteor-info {
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      font-size: 9px;
+      
+      .icon {
+        float: left;
+        margin-right: 4px;
+      }
+    }
   }
 
   p {
