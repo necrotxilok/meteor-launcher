@@ -23,6 +23,7 @@
 
       if (html) {
         $charm.find('.charm-content-container').html(html);
+        $charm.scrollTop(0);
       }
     }
 
@@ -50,22 +51,22 @@
     // Close event
     $charm.find('.charm-close').on('click', function() {
       event.preventDefault();
-      _self.close();      
+      _self.close();
     });
     $('body').on('click', '.charm-overlay', function() {
       event.preventDefault();
-      _self.close();      
+      _self.close();
     });
     $('body').on('contextmenu', '.charm-overlay', function() {
       event.preventDefault();
-      _self.close();      
+      _self.close();
     });
 
     // Stop Propagation
     $charm.mousewheel(function(event) {
       event.stopPropagation();
     });
-    
+
     return this;
   }
 

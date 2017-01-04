@@ -39,6 +39,8 @@
     <!-- User Interface -->
     <script type="text/javascript" src="js/ui/project_view.js"></script>
     <script type="text/javascript" src="js/ui/project_editor.js"></script>
+    <script type="text/javascript" src="js/ui/project_packages.js"></script>
+    <script type="text/javascript" src="js/ui/project_platforms.js"></script>
     <script type="text/javascript" src="js/ui/grid.js"></script>
     <script type="text/javascript" src="js/ui/search.js"></script>
     <script type="text/javascript" src="js/ui/settings.js"></script>
@@ -48,6 +50,22 @@
     <div class="charm right-side padding20 bg-grayDark" id="charmEditor">
         <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
         <h1 class="text-light charm-title">Project</h1>
+        <hr class="thin">
+        <br>
+        <div class="charm-content-container"></div>
+    </div>
+
+    <div class="charm right-side padding20 bg-grayDark" id="charmPackages">
+        <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
+        <h1 class="text-light charm-title">Packages</h1>
+        <hr class="thin">
+        <br>
+        <div class="charm-content-container"></div>
+    </div>
+
+    <div class="charm right-side padding20 bg-grayDark" id="charmPlatforms">
+        <button class="charm-close square-button bg-transparent fg-white no-border place-right small-button"><span class="mif-cross"></span></button>
+        <h1 class="text-light charm-title">Platforms</h1>
         <hr class="thin">
         <br>
         <div class="charm-content-container"></div>
@@ -77,15 +95,10 @@
         <div class="tile-area fg-white tile-area-scheme-dark">
             <h1 class="tile-area-title"><img src="img/meteor_launcher.png"> Meteor Launcher</h1>
             <div class="tile-area-controls">
-                <!--
-                <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">Sergey Pimenov</span> <span class="icon mif-user"></span></button>
-                -->
-                <button class="add-project square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmEditor" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Add new project"><span class="mif-plus"></span></button>
+                <button class="create-project square-button bg-transparent fg-white bg-hover-dark no-border" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Create project"><span class="mif-folder-special"></span></button>
+                <button class="add-project square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmEditor" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Add project"><span class="mif-plus"></span></button>
                 <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSearch" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="Search project"><span class="mif-search"></span></button>
                 <button class="charm-open square-button bg-transparent fg-white bg-hover-dark no-border" data-target="#charmSettings" data-role="hint" data-hint-background="bg-darker" data-hint-color="fg-white" data-hint-mode="2" data-hint="General Settings"><span class="mif-cog"></span></button>
-                <!--
-                <a href="#" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
-                -->
             </div>
 
             <ul id="grid" class="grid">

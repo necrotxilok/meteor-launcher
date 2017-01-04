@@ -39,6 +39,15 @@
           background-color: transparent;
         }
       }
+
+      .split-button .split {
+        float: right;
+        border: none;
+
+        &:before {
+          border-color: #fff;
+        }
+      }
     }
 
     .log {
@@ -100,7 +109,7 @@
       left: 0;
       bottom: -15px;
       font-size: 9px;
-      
+
       .icon {
         float: left;
         margin-right: 4px;
@@ -121,5 +130,13 @@
     height: auto;
     min-height: 0;
     padding: 0px 10px;
+  }
+}
+
+.error-message {
+  .icon {
+    display: block;
+    font-size: 30px;
+    margin: 15px 0;
   }
 }
