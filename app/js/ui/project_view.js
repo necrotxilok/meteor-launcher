@@ -96,11 +96,15 @@
       $log.empty();
     }
 
+    var animateScroll = _.debounce(function() {
+      var scrollHeight = $log.get(0).scrollHeight;
+      $log.animate({'scrollTop': scrollHeight}, 500);
+    }, 50);
+
     var showLogMessage = function(message) {
       if ($log && $log.length) {
         $log.append('<p>' + message + '</p>');
-        var scrollHeight = $log.get(0).scrollHeight;
-        $log.animate({'scrollTop': scrollHeight}, 500);
+        animateScroll();
       }
     }
 
@@ -155,12 +159,9 @@
       $log = dialog.find('.log-view');
 
       var log = App.Process.getLog(project_id);
-      _.each(log, function(line) {
-        $log.append('<p>' + line + '</p>');
+      _.each(log, function(msg) {
+        showLogMessage(msg);
       });
-
-      var scrollHeight = $log.get(0).scrollHeight;
-      $log.animate({'scrollTop': scrollHeight}, 500);
 
       $controls = dialog.find('.project-controls');
 

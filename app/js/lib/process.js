@@ -198,7 +198,7 @@
               var data = execSync('adb devices', {cwd: project.folder});
               var lines = data.toString().split("\n");
               _.each(lines, function(text) {
-                if (text.trim() && !text.match('List of devices attached')  && !text.match(/\*/)) {
+                if (text.trim() && !text.match('List of devices attached')  && !text.match('adb server version') && !text.match(/\*/)) {
                   devices.push(text.trim());
                 }
               });
@@ -318,7 +318,9 @@
     // == PUBLIC ==============================================================
 
     this.connectTerminal = function(project_id) {
-      if (!procs[project_id]) {
+      var meteor = procs[project_id];
+
+      if (!meteor) {
         var meteor = {
           watch: $.Deferred(),
           proc: null
@@ -326,7 +328,9 @@
         procs[project_id] = meteor;
       }
 
-      return procs[project_id];
+      meteor.watch = $.Deferred();
+
+      return meteor;
     }
 
     this.isRunning = function(project_id) {
