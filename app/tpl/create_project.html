@@ -1,0 +1,28 @@
+<div class="create-project-container">
+  <h1 class="title">Create Project</h1>
+  <label>Project name</label>
+  <div class="input-control text full-size">
+      <input id="projectName" type="text" value="{{project.name}}" data-validate-hint="This field can not be empty!">
+      <span class="input-state-error mif-warning"></span>
+      <span class="input-state-success mif-checkmark"></span>
+  </div>
+  <label>Project root folder</label>
+  <div class="input-control text text-file full-size">
+      <input id="projectFolderText" type="text" value="{{project.folder}}" data-validate-hint="This field can not be empty!">
+      <button class="button file"><span class="mif-folder-open"></span><input id="projectFolder" type="file" nwdirectory></button>
+  </div>
+  <p></p>
+  <div class="messages">
+    <div class="info">The project will be created on this folder:</div>
+    <pre class="output-folder padding10"></pre>
+    <div class="message folder-ready padding10 bg-green fg-white"><div class="icon mif-checkmark"></div> The output folder is valid to create a new meteor project.</div>
+    <div class="message folder-has-meteor-project padding10 bg-red fg-white"><div class="icon mif-notification"></div> The output folder contains another meteor project. Please, select another folder or choose another name for this project. If you want to add this project to Meteor Launcher choose the option "Add Project".</div>
+    <div class="message folder-not-empty padding10 bg-red fg-white"><div class="icon mif-notification"></div> The output folder is not empty. Please, select another folder or choose another name for this project.</div>
+    <div class="message folder-not-exists padding10 bg-red fg-white"><div class="icon mif-notification"></div> The selected root folder does not exists in your system. Please, create it before performing this action. </div>
+  </div>
+  <p></p>
+	<p class="align-right">
+    <button class="button button-create bg-lightBlue bg-active-blue fg-white">Create</button>
+    <button class="button close">Cancel</button>
+  </p>
+</div>

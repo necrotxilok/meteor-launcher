@@ -21,7 +21,7 @@
       options: options
     }));
 
-    this.open = function() {
+    this.open = function(hideOverlay) {
       $dialog.appendTo('body');
       $dialog.on('click', '.dialog-close-button', function() {
         setTimeout(function() {
@@ -31,6 +31,9 @@
       setTimeout(function() {
         var dlg = $dialog.data('dialog');
         dlg.open();
+        if (hideOverlay) {
+          $('.dialog-overlay').remove();
+        }
       }, 1);
     }
 

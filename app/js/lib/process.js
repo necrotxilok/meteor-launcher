@@ -290,10 +290,10 @@
       }
 
       if (command) {
-        // RUN METEOR PLATFORM
+        // RUN METEOR PLATFORM PROCESS
         var proc = exec(command, {cwd: project.folder});
 
-        // WATCH METEOR PLATFORM
+        // WATCH METEOR PLATFORM PROCESS
         proc.on('exit', function (code) {
           if (code) {
             if (action == 'add') {
@@ -312,6 +312,88 @@
           }
         });
       }
+    }
+
+    var changePackage = function(project_id, action, type, name) {
+      var project = findProject(project_id);
+      var command;
+      var cmdAction = action;
+      var meteor = procs[project_id];
+
+      var typeNames = {
+        'meteor': 'Meteor Package',
+        'node': 'Node Module',
+        'cordova': 'Cordova Plugin'
+      };
+
+      if (!logs[project_id]) {
+        logs[project_id] = [];
+      }
+
+      var logMessage = function(message) {
+        if (message) {
+          logs[project_id].push(message);
+          meteor.watch.notify(message, project_id);
+        }
+      }
+
+      logMessage('&nbsp;');
+      if (action == 'add') {
+        logMessage('Adding "' + name + '" ' + typeNames[type] + '...');
+      }
+      if (action == 'remove') {
+        logMessage('Removing "' + name + '" ' + typeNames[type] + '...');
+      }
+
+      if (type == 'node') {
+        if (action == 'add') cmdAction = 'npm install';
+        if (action == 'remove') cmdAction = 'npm uninstall';
+      }
+
+      if (type == 'cordova') {
+        name = 'cordova:' + name;
+      }
+
+      command = meteorExec + ' ' + cmdAction + ' ' + name;
+
+      if (type == 'node') {
+        command += ' --save';
+      }
+
+      // RUN METEOR PACKAGE PROCESS
+      var proc = exec(command, {cwd: project.folder});
+
+      // WATCH METEOR PACKAGE PROCESS
+      proc.stdout.on('data', function (data) {
+        //console.log('>', data);
+        logMessage(data);
+      });
+
+      proc.stderr.on('data', function (error_info) {
+        if (error_info) {
+          logMessage(error_info);
+        }
+      });
+
+      proc.on('exit', function (code) {
+        logMessage('&nbsp;');
+        if (code) {
+          if (action == 'add') {
+            logMessage('ERROR: Package "' + name + '" could not be added, please try again.');
+          }
+          if (action == 'remove') {
+            logMessage('ERROR: Package "' + name + '" could not be removed, please try again.');
+          }
+        } else {
+          if (action == 'add') {
+            logMessage('Success!! "' + name + '" ' + typeNames[type] + ' was added to project.');
+          }
+          if (action == 'remove') {
+            logMessage('Success!! "' + name + '" ' + typeNames[type] + ' was removed from project.');
+          }
+        }
+        logMessage('&nbsp;');
+      });
     }
 
 
@@ -392,6 +474,47 @@
 
     this.removePlatform = function(project_id, platform) {
       changePlatform(project_id, 'remove', platform);
+    }
+
+    this.addPackage = function(project_id, type, name) {
+      changePackage(project_id, 'add', type, name);
+    }
+
+    this.removePackage = function(project_id, type, name) {
+      changePackage(project_id, 'remove', type, name);
+    }
+
+    this.createProject = function(projectName, projectFolder, sendMessage) {
+      var path = require('path');
+      var folderName = projectName.toLowerCase().replace(' ', '-');
+      var outputFolder = path.normalize(projectFolder + '/' + folderName);
+      var command = meteorExec + ' create ' + folderName;
+
+      // RUN METEOR CREATE PROCESS
+      var proc = exec(command, {cwd: projectFolder});
+
+      // WATCH METEOR CREATE PROCESS
+      proc.stdout.on('data', function (data) {
+        //console.log('>', data);
+        sendMessage(data);
+      });
+
+      proc.stderr.on('data', function (error_info) {
+        if (error_info) {
+          sendMessage(error_info);
+        }
+      });
+
+      proc.on('exit', function (code) {
+        sendMessage('&nbsp;');
+        if (code) {
+          sendMessage('ERROR', false, code);
+        } else {
+          sendMessage('SUCCESS', true);
+          // TODO: Add project to App.projects with this settings
+        }
+        sendMessage('&nbsp;');
+      });
     }
 
     // == INITIALIZE ==============================================================

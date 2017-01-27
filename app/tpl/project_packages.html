@@ -3,14 +3,21 @@
     {{{error}}}
   </div>
 {{else}}
+  <div class="package-search">
+    <div class="input-control text full-size">
+        <input type="text" class="input-search">
+        <button class="button"><span class="mif-search"></span></button>
+    </div>
+  </div>
   <div class="package-header">
     <h3>Meteor</h3>
     <div class="button-add bg-lightBlue bg-active-blue fg-white" data-type="meteor"><span class="icon mif-plus"></span></div>
   </div>
-  <div class="meteor-packages list">
+  <div class="meteor-packages list" data-type="meteor">
     {{#each packages.meteor}}
-    <div class="item package">
+    <div class="item package" data-name="{{name}}">
       <span class="name">{{name}}</span>
+      <span class="version">{{version}}</span>
       <span class="icon mif-bin button-remove" data-name="{{name}}"></span>
     </div>
     {{/each}}
@@ -19,10 +26,24 @@
     <h3>Node</h3>
     <div class="button-add bg-lightBlue bg-active-blue fg-white" data-type="node"><span class="icon mif-plus"></span></div>
   </div>
-  <div class="node-packages list">
+  <div class="node-packages list" data-type="node">
     {{#each packages.node}}
     <div class="item package">
       <span class="name">{{name}}</span>
+      <span class="version">{{version}}</span>
+      <span class="icon mif-bin button-remove" data-name="{{name}}"></span>
+    </div>
+    {{/each}}
+  </div>
+  <div class="package-header">
+    <h3>Cordova</h3>
+    <div class="button-add bg-lightBlue bg-active-blue fg-white" data-type="cordova"><span class="icon mif-plus"></span></div>
+  </div>
+  <div class="cordova-packages list" data-type="cordova">
+    {{#each packages.cordova}}
+    <div class="item package">
+      <span class="name">{{name}}</span>
+      <span class="version">{{version}}</span>
       <span class="icon mif-bin button-remove" data-name="{{name}}"></span>
     </div>
     {{/each}}

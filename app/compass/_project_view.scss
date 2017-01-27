@@ -1,9 +1,10 @@
 
-.dialog.project-dialog {
+.project-dialog {
   top: 0px !important;
   bottom: 0px !important;
   left: 0px !important;
   right: 0px !important;
+  z-index: 500;
 
   .dialog-body {
     width: 100%;
@@ -123,8 +124,8 @@
   }
 
   .dialog-close-button {
-    background-color: transparent;
-    color: white;
+    background-color: transparent !important;
+    color: white !important;
     font-size: 37px;
     width: auto;
     height: auto;

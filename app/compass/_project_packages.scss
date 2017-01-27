@@ -28,25 +28,33 @@
 
       transition: all 0.2s ease-in-out;
 
-      .icon {
+      .button-remove {
         opacity: 0;
         cursor: pointer;
         float: right;
         width: 30px;
         height: 30px;
         padding: 7px;
-        margin: -6px;
         font-size: 16px;
         transition: all 0.2s ease-in-out;
+        position: absolute;
+        top: 3px;
+        right: 0;
       }
 
       .name {
-        font-size: 17px;
+        font-size: 15px;
+        max-width: 90%;
+        display: inline-block;
+      }
+      .version {
+        font-size: 10px;
+        color: #AAA;
       }
 
       &:hover {
         background-color: #666;
-        .icon {
+        .button-remove {
           opacity: 0.5;
           &:hover {
             opacity: 1;
@@ -54,5 +62,31 @@
         }
       }
     }
+
+    [data-name="insecure"], [data-name="autopublish"] {
+      .name {
+        color: #f22;
+      }
+    }
   }
+}
+
+
+.dialog {
+
+  .add-package-container, .remove-package-container {
+    width: 500px;
+
+    .title {
+      font-size: 24px;
+    }
+  }
+
+  .add-package-container {
+    .input-name {
+      width: 100%;
+      padding: 6px;
+    }
+  }
+
 }

@@ -173,6 +173,8 @@
 
       var $meteorInfo = dialog.find('.meteor-info');
       $meteorInfo.html(App.File.getMeteorVersion(activeProject.folder));
+
+      dialog.open(true);
     }
 
     var bindEvents = function($container) {
@@ -212,8 +214,6 @@
 
     this.viewProject = function(project_id) {
       render(project_id);
-
-      dialog.open();
 
       bindEvents(dialog.$el);
     }

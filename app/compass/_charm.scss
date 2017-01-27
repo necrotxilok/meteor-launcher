@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1051;
+  z-index: 599;
   background: rgba(0,0,0,0.3);
 }
 
@@ -13,6 +13,7 @@
   width: 350px;
   right: -350px;
   overflow: auto;
+  z-index: 600;
 
   label {
     display: block;

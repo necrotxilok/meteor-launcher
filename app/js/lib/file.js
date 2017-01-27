@@ -92,14 +92,16 @@
     this.getMeteorPackages = function(projectPath) {
       var meteorPackagesFile = projectPath + DS + '.meteor/packages';
       var nodePackagesFile = projectPath + DS + 'package.json';
+      var cordovaPackagesFile = projectPath + DS + '.meteor/cordova-plugins';
       if (fs.existsSync(meteorPackagesFile)) {
         var packages = {
           meteor: [],
-          node: []
+          node: [],
+          cordova: []
         };
 
-        var lines = fs.readFileSync(meteorPackagesFile).toString().replace(/#.*/gi, "").split("\n");
-        _.each(lines, function(p) {
+        var meteor = fs.readFileSync(meteorPackagesFile).toString().replace(/#.*/gi, "").split("\n");
+        _.each(meteor, function(p) {
           if (p && p.trim()) {
             var parts = p.trim().split("@");
             if (parts.length == 2 && parts[0]) {
@@ -115,6 +117,7 @@
             }
           }
         });
+
         if (fs.existsSync(nodePackagesFile)) {
           var nodePackages = JSON.parse(fs.readFileSync(nodePackagesFile));
           if (nodePackages && nodePackages.dependencies) {
@@ -125,6 +128,26 @@
               });
             });
           }
+        }
+
+        if (fs.existsSync(cordovaPackagesFile)) {
+          var cordova = fs.readFileSync(cordovaPackagesFile).toString().replace(/#.*/gi, "").split("\n");
+          _.each(cordova, function(p) {
+            if (p && p.trim()) {
+              var parts = p.trim().split("@");
+              if (parts.length == 2 && parts[0]) {
+                packages.cordova.push({
+                  name: parts[0],
+                  version: parts[1]
+                });
+              }
+              if (parts.length == 1 && parts[0]) {
+                packages.cordova.push({
+                  name: parts[0]
+                });
+              }
+            }
+          });
         }
 
         return packages;
@@ -157,6 +180,21 @@
       } else {
         return meteorNotFoundMessage;
       }
+    }
+
+    this.folderExists = function(folder) {
+      if (fs.existsSync(folder)) {
+        return true;
+      }
+      return false;
+    }
+
+    this.folderIsEmpty = function(folder) {
+      var files = fs.readdirSync(folder);
+      if (!files.length) {
+        return true;
+      }
+      return false;
     }
 
     return this;
