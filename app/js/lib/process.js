@@ -494,26 +494,42 @@
       var proc = exec(command, {cwd: projectFolder});
 
       // WATCH METEOR CREATE PROCESS
-      proc.stdout.on('data', function (data) {
-        //console.log('>', data);
-        sendMessage(data);
-      });
-
-      proc.stderr.on('data', function (error_info) {
-        if (error_info) {
-          sendMessage(error_info);
-        }
-      });
-
       proc.on('exit', function (code) {
-        sendMessage('&nbsp;');
         if (code) {
-          sendMessage('ERROR', false, code);
+          sendMessage('ERROR! The project could not be created. Please, check if you have write access in the selected root folder.', false, code);
         } else {
-          sendMessage('SUCCESS', true);
-          // TODO: Add project to App.projects with this settings
+          // RUN METEOR DEPENDENCIES PROCESS
+          var dependencies = exec(meteorExec + ' npm install', {cwd: outputFolder});
+
+          sendMessage('Installing dependencies...');
+
+          // WATCH METEOR DEPENDENCIES PROCESS
+          dependencies.on('exit', function (code) {
+            if (code) {
+              sendMessage('ERROR! Unable to install dependencies for this project. Try to install from terminal using "meteor npm install" and add the project manually.', false, code);
+            } else {
+              sendMessage('Project successfully created!', 1);
+              setTimeout(function() {
+                // ADD PROJECT AND SAVE
+                var newProject = {
+                  id: App.uniqueId(),
+                  name: projectName,
+                  folder: outputFolder,
+                  port: 3000,
+                  color: 'bg-grayLight',
+                  image: '',
+                  size: 0,
+                  x: 1000,
+                  y: 1000
+                };
+                App.projects.push(newProject);
+                App.UI.Grid.addItem(newProject);
+                App.File.saveProjects();
+                sendMessage('', 2);
+              }, 1500);
+            }
+          });
         }
-        sendMessage('&nbsp;');
       });
     }
 

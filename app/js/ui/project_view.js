@@ -241,6 +241,12 @@
       }
     }
 
+    this.close = function() {
+      if (dialog && dialog.close) {
+        dialog.close();
+      }
+    }
+
     // == INITIALIZE ==============================================================
 
     return this;

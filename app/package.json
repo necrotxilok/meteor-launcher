@@ -37,7 +37,7 @@
         "title": "Meteor Launcher",
         "always_on_top": false,
         "visible_on_all_workspaces": false,
-        "width": 980,
+        "width": 1024,
         "resizable": true,
         "kiosk_emulation": false,
         "id": "app",
@@ -50,7 +50,7 @@
         "kiosk": false,
         "fullscreen": false,
         "frame": true,
-        "min_width": 700,
+        "min_width": 900,
         "always-on-top": false,
         "height": 660
     },

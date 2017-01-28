@@ -1,3 +1,5 @@
+![Meteor Launcher Screenshot](http://necrotxilok.github.io/meteor-launcher/img/screenshots/screenshot-01.png)
+
 # Meteor Launcher
 Desktop App to easy manage and launch multiple [Meteor](https://www.meteor.com/) applications in your local machine for development.
 

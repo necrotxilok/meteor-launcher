@@ -22,7 +22,16 @@
   </div>
   <p></p>
 	<p class="align-right">
-    <button class="button button-create bg-lightBlue bg-active-blue fg-white">Create</button>
+    <button class="button button-create bg-lightBlue bg-active-blue fg-white" disabled="disabled">Create</button>
     <button class="button close">Cancel</button>
   </p>
+  <div class="creating-overlay">
+    <div class="loading-box">
+      <div class="loading"><span class="mif-spinner3 mif-ani-spin"></span></div>
+      <div class="success hidden"><div class="icon mif-checkmark"></div></div>
+      <div class="error hidden"><div class="icon mif-notification"></div></div>
+      <div class="msg"></div>
+      <div class="error hidden"><button class="button close">Close</button></div>
+    </div>
+  </div>
 </div>

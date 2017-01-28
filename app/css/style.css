@@ -144,16 +144,16 @@ body {
       border: none;
       background: rgba(255, 255, 255, 0.05); }
 
-/* line 77, ../compass/_grid.scss */
+/* line 4, ../compass/_project_create.scss */
 .dialog .create-project-container {
   width: 500px; }
-  /* line 80, ../compass/_grid.scss */
+  /* line 7, ../compass/_project_create.scss */
   .dialog .create-project-container label {
     cursor: default; }
-  /* line 84, ../compass/_grid.scss */
+  /* line 11, ../compass/_project_create.scss */
   .dialog .create-project-container .button.file {
     overflow: hidden; }
-  /* line 88, ../compass/_grid.scss */
+  /* line 15, ../compass/_project_create.scss */
   .dialog .create-project-container .input-control button.file input[type="file"] {
     padding: 500px;
     position: absolute;
@@ -163,16 +163,16 @@ body {
     bottom: 0;
     border: none;
     cursor: pointer; }
-  /* line 99, ../compass/_grid.scss */
+  /* line 26, ../compass/_project_create.scss */
   .dialog .create-project-container .messages {
     display: none; }
-    /* line 101, ../compass/_grid.scss */
+    /* line 28, ../compass/_project_create.scss */
     .dialog .create-project-container .messages .info {
       font-size: 10px; }
-    /* line 104, ../compass/_grid.scss */
+    /* line 31, ../compass/_project_create.scss */
     .dialog .create-project-container .messages .message {
       display: none; }
-      /* line 106, ../compass/_grid.scss */
+      /* line 33, ../compass/_project_create.scss */
       .dialog .create-project-container .messages .message .icon {
         float: left;
         display: block;
@@ -180,12 +180,57 @@ body {
         margin-bottom: 7px;
         margin-right: 10px;
         height: 50px; }
-        /* line 114, ../compass/_grid.scss */
+        /* line 41, ../compass/_project_create.scss */
         .dialog .create-project-container .messages .message .icon.mif-checkmark {
           font-size: 16px; }
-  /* line 121, ../compass/_grid.scss */
+  /* line 48, ../compass/_project_create.scss */
   .dialog .create-project-container .button-create {
-    display: none; }
+    opacity: 0.5; }
+  /* line 52, ../compass/_project_create.scss */
+  .dialog .create-project-container .creating-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 10;
+    text-align: center; }
+    /* line 64, ../compass/_project_create.scss */
+    .dialog .create-project-container .creating-overlay .loading-box {
+      margin-top: 80px; }
+      /* line 67, ../compass/_project_create.scss */
+      .dialog .create-project-container .creating-overlay .loading-box .loading {
+        font-size: 60px;
+        color: #bbb; }
+      /* line 72, ../compass/_project_create.scss */
+      .dialog .create-project-container .creating-overlay .loading-box .success {
+        display: inline-block;
+        border: 2px solid #0B0;
+        color: #0B0;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        padding: 26px;
+        font-size: 24px; }
+        /* line 81, ../compass/_project_create.scss */
+        .dialog .create-project-container .creating-overlay .loading-box .success .icon {
+          margin-bottom: 8px; }
+      /* line 86, ../compass/_project_create.scss */
+      .dialog .create-project-container .creating-overlay .loading-box .error {
+        display: inline-block;
+        color: #B00; }
+        /* line 89, ../compass/_project_create.scss */
+        .dialog .create-project-container .creating-overlay .loading-box .error .icon {
+          font-size: 64px; }
+      /* line 94, ../compass/_project_create.scss */
+      .dialog .create-project-container .creating-overlay .loading-box .msg {
+        color: #bbb;
+        margin: 20px 0; }
+      /* line 99, ../compass/_project_create.scss */
+      .dialog .create-project-container .creating-overlay .loading-box .hidden {
+        display: none; }
 
 /* line 8, ../compass/_project_item.scss */
 .grid .item .controls {

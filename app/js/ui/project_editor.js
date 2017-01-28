@@ -37,6 +37,7 @@
     }
 
     var removeProject = function(project) {
+      App.UI.ProjectView.close();
       App.projects = _.without(App.projects, project);
       App.UI.Grid.removeItem(project.id);
       App.File.saveProjects();
