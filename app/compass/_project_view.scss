@@ -102,6 +102,10 @@
         &.running {
             border: 3px solid #60a917;
         }
+
+        &.building {
+            border: 3px solid #1b6eae;
+        }
       }
     }
 

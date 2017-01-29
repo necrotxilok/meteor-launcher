@@ -286,8 +286,12 @@ body {
 /* line 82, ../compass/_project_item.scss */
 .grid .item.state-launched .project-launched {
   display: block; }
+/* line 89, ../compass/_project_item.scss */
+.grid .item.state-building .project-launched {
+  display: block;
+  border: 3px solid #1b6eae; }
 
-/* line 99, ../compass/_project_item.scss */
+/* line 107, ../compass/_project_item.scss */
 .inner .tile {
   margin: 0;
   position: absolute;
@@ -297,14 +301,14 @@ body {
   right: 0;
   width: auto;
   height: auto; }
-  /* line 109, ../compass/_project_item.scss */
+  /* line 117, ../compass/_project_item.scss */
   .inner .tile .tile-content {
     display: block;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center; }
-  /* line 117, ../compass/_project_item.scss */
+  /* line 125, ../compass/_project_item.scss */
   .inner .tile .tile-label {
     font-size: 0.4em; }
 
@@ -408,21 +412,24 @@ body {
         /* line 102, ../compass/_project_view.scss */
         .project-dialog .content .log .log-view.running {
           border: 3px solid #60a917; }
-    /* line 108, ../compass/_project_view.scss */
+        /* line 106, ../compass/_project_view.scss */
+        .project-dialog .content .log .log-view.building {
+          border: 3px solid #1b6eae; }
+    /* line 112, ../compass/_project_view.scss */
     .project-dialog .content .meteor-info {
       position: absolute;
       left: 0;
       bottom: -15px;
       font-size: 9px; }
-      /* line 114, ../compass/_project_view.scss */
+      /* line 118, ../compass/_project_view.scss */
       .project-dialog .content .meteor-info .icon {
         float: left;
         margin-right: 4px; }
-  /* line 121, ../compass/_project_view.scss */
+  /* line 125, ../compass/_project_view.scss */
   .project-dialog p {
     margin: 0;
     line-height: 1.3; }
-  /* line 126, ../compass/_project_view.scss */
+  /* line 130, ../compass/_project_view.scss */
   .project-dialog .dialog-close-button {
     background-color: transparent !important;
     color: white !important;
@@ -432,7 +439,7 @@ body {
     min-height: 0;
     padding: 0px 10px; }
 
-/* line 138, ../compass/_project_view.scss */
+/* line 142, ../compass/_project_view.scss */
 .error-message .icon {
   display: block;
   font-size: 30px;
@@ -490,6 +497,31 @@ body {
       bottom: 0;
       border: none;
       cursor: pointer; }
+
+/* line 4, ../compass/_project_build.scss */
+.dialog .build-project-container {
+  width: 500px; }
+  /* line 7, ../compass/_project_build.scss */
+  .dialog .build-project-container label {
+    display: block;
+    cursor: default;
+    margin-top: 8px; }
+  /* line 13, ../compass/_project_build.scss */
+  .dialog .build-project-container .button.file {
+    overflow: hidden; }
+  /* line 17, ../compass/_project_build.scss */
+  .dialog .build-project-container .input-control button.file input[type="file"] {
+    padding: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: none;
+    cursor: pointer; }
+  /* line 28, ../compass/_project_build.scss */
+  .dialog .build-project-container .button-build {
+    opacity: 0.5; }
 
 /* line 4, ../compass/_project_packages.scss */
 #charmPackages .package-header h3 {

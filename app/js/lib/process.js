@@ -396,6 +396,128 @@
       });
     }
 
+    var createProject = function(projectName, projectFolder, sendMessage) {
+      var path = require('path');
+      var folderName = projectName.toLowerCase().replace(' ', '-');
+      var outputFolder = path.normalize(projectFolder + '/' + folderName);
+      var command = meteorExec + ' create ' + folderName;
+
+      // RUN METEOR CREATE PROCESS
+      var proc = exec(command, {cwd: projectFolder});
+
+      // WATCH METEOR CREATE PROCESS
+      proc.on('exit', function (code) {
+        if (code) {
+          sendMessage('ERROR! The project could not be created. Please, check if you have write access in the selected root folder.', false, code);
+        } else {
+          // RUN METEOR DEPENDENCIES PROCESS
+          var dependencies = exec(meteorExec + ' npm install', {cwd: outputFolder});
+
+          sendMessage('Installing dependencies...');
+
+          // WATCH METEOR DEPENDENCIES PROCESS
+          dependencies.on('exit', function (code) {
+            if (code) {
+              sendMessage('ERROR! Unable to install dependencies for this project. Try to install from terminal using "meteor npm install" and add the project manually.', false, code);
+            } else {
+              sendMessage('Project successfully created!', 1);
+              setTimeout(function() {
+                // ADD PROJECT AND SAVE
+                var newProject = {
+                  id: App.uniqueId(),
+                  name: projectName,
+                  folder: outputFolder,
+                  port: 3000,
+                  color: 'bg-grayLight',
+                  image: '',
+                  size: 0,
+                  x: 1000,
+                  y: 1000
+                };
+                App.projects.push(newProject);
+                App.UI.Grid.addItem(newProject);
+                App.File.saveProjects();
+                sendMessage('', 2);
+              }, 1500);
+            }
+          });
+        }
+      });
+    }
+
+    var buildProject = function(project) {
+      var meteor = procs[project.id];
+      meteor.build = $.Deferred();
+      meteor.project = project;
+
+      var command = meteorExec + ' build "' + project.outputFolder + '"';
+
+      if (project.serverArchitecture) {
+        command += ' --architecture ' + project.serverArchitecture;
+      }
+
+      if (project.serverName) {
+        command += ' --server ' + project.serverName;
+      }
+
+      var logMessage = function(message) {
+        message = message.replace(/\[[0-9]{2}m/g, '');
+        message = message.replace(/W.*?\(STDERR\)\s*/g, 'ERR > ').trim();
+        message = message.replace(/I.*?\)(\?| )\s*/g, '').trim();
+        if (message) {
+          var msgs = message.split("\n");
+          _.each(msgs, function(msg) {
+            msg = msg.trim();
+            logs[project.id].push(msg);
+            meteor.watch.notify(msg, project.id);
+          });
+        }
+      }
+
+      logs[project.id] = [];
+
+      if (fs.existsSync(project.folder)) {
+        logMessage('Building ' + project.name + ' App...');
+
+        // RUN METEOR BUILD
+        meteor.proc = exec(command, {cwd: project.folder});
+
+        // WATCH METEOR
+        meteor.proc.stdout.on('data', function (data) {
+          //console.log('>', data);
+          if (data) {
+            logMessage(data);
+          }
+        });
+
+        meteor.proc.stderr.on('data', function (error_info) {
+          if (error_info) {
+            logMessage(error_info);
+          }
+        });
+
+        meteor.proc.on('exit', function (code) {
+          if (code) {
+            logMessage('&nbsp;');
+            logMessage('Meteor process exited with code ' + code);
+            meteor.build.reject();
+          } else {
+            logMessage('&nbsp;');
+            logMessage('Meteor build completed!!');
+            meteor.build.resolve();
+          }
+          meteor.proc = null;
+          delete meteor.build;
+        });
+
+        return meteor;
+      } else {
+        logMessage('The project cannot run in the path "' + project.folder + '". Please, check if the path exists and you have access to it.');
+      }
+
+      return false;
+    }
+
 
     // == PUBLIC ==============================================================
 
@@ -417,7 +539,16 @@
 
     this.isRunning = function(project_id) {
       var meteor = procs[project_id];
-      if (meteor.proc) {
+      if (meteor.run) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    this.isBuilding = function(project_id) {
+      var meteor = procs[project_id];
+      if (meteor.build) {
         return true;
       } else {
         return false;
@@ -485,52 +616,24 @@
     }
 
     this.createProject = function(projectName, projectFolder, sendMessage) {
-      var path = require('path');
-      var folderName = projectName.toLowerCase().replace(' ', '-');
-      var outputFolder = path.normalize(projectFolder + '/' + folderName);
-      var command = meteorExec + ' create ' + folderName;
+      createProject(projectName, projectFolder, sendMessage);
+    }
 
-      // RUN METEOR CREATE PROCESS
-      var proc = exec(command, {cwd: projectFolder});
+    this.buildProject = function(project) {
+      var meteor = procs[project.id];
 
-      // WATCH METEOR CREATE PROCESS
-      proc.on('exit', function (code) {
-        if (code) {
-          sendMessage('ERROR! The project could not be created. Please, check if you have write access in the selected root folder.', false, code);
-        } else {
-          // RUN METEOR DEPENDENCIES PROCESS
-          var dependencies = exec(meteorExec + ' npm install', {cwd: outputFolder});
+      if (!meteor) {
+        meteor = this.connectTerminal(project.id);
+      }
 
-          sendMessage('Installing dependencies...');
-
-          // WATCH METEOR DEPENDENCIES PROCESS
-          dependencies.on('exit', function (code) {
-            if (code) {
-              sendMessage('ERROR! Unable to install dependencies for this project. Try to install from terminal using "meteor npm install" and add the project manually.', false, code);
-            } else {
-              sendMessage('Project successfully created!', 1);
-              setTimeout(function() {
-                // ADD PROJECT AND SAVE
-                var newProject = {
-                  id: App.uniqueId(),
-                  name: projectName,
-                  folder: outputFolder,
-                  port: 3000,
-                  color: 'bg-grayLight',
-                  image: '',
-                  size: 0,
-                  x: 1000,
-                  y: 1000
-                };
-                App.projects.push(newProject);
-                App.UI.Grid.addItem(newProject);
-                App.File.saveProjects();
-                sendMessage('', 2);
-              }, 1500);
-            }
-          });
+      if (!meteor.proc) {
+        var meteor = buildProject(project);
+        if (!meteor) {
+          return false;
         }
-      });
+      }
+
+      return meteor;
     }
 
     // == INITIALIZE ==============================================================

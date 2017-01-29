@@ -33,7 +33,6 @@ App = {};
   App.uniqueId.previous = 0;
 
   $(function() {
-
     App.version = App.nwGui.App.manifest.version;
 
     App.settings = App.File.getSettings();

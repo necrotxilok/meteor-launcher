@@ -1,0 +1,33 @@
+
+
+.dialog {
+  .build-project-container {
+    width: 500px;
+
+    label {
+      display: block;
+      cursor: default;
+      margin-top: 8px;
+    }
+
+    .button.file {
+      overflow: hidden;
+    }
+
+    .input-control button.file input[type="file"] {
+      padding: 500px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-build {
+      opacity: 0.5;
+    }
+
+  }
+}

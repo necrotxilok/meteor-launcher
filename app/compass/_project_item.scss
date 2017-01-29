@@ -84,6 +84,14 @@
       }
     }
 
+    // BUILDING
+    &.state-building {
+      .project-launched {
+        display: block;
+        border: 3px solid #1b6eae;
+      }
+    }
+
     // ERROR
     &.state-error {
 

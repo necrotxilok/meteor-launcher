@@ -32,9 +32,11 @@
     var setState = function(state) {
         switch (state) {
           case 'running':
+          case 'building':
             if ($controls && $controls.length) {
               $controls.find('.runner').hide();
               $controls.find('.button-stop').show();
+              $controls.find('.button-build').hide();
             }
             if ($log && $log.length) {
               $log.addClass(state);
@@ -45,9 +47,10 @@
             if ($controls && $controls.length) {
               $controls.find('.runner').css('display', 'inline-block');
               $controls.find('.button-stop').hide();
+              $controls.find('.button-build').show();
             }
             if ($log && $log.length) {
-              $log.removeClass('running');
+              $log.removeClass('running building');
             }
         }
     }
@@ -55,14 +58,14 @@
     var playProject = function(platform) {
       var meteor = App.Process.run(activeProject.id, platform);
 
-      if ($log && $log.length) {
+      /*if ($log && $log.length) {
         $log.empty();
 
         var log = App.Process.getLog(activeProject.id);
         _.each(log, function(line) {
           $log.append('<p>' + line + '</p>');
         });
-      }
+      }*/
 
       setState('running');
 
@@ -106,6 +109,10 @@
         $log.append('<p>' + message + '</p>');
         animateScroll();
       }
+    }
+
+    var buildProject = function() {
+      App.UI.ProjectBuild.open(activeProject);
     }
 
     var render = function(project_id) {
@@ -167,6 +174,8 @@
 
       if (App.Process.isRunning(project_id)) {
         setState('running');
+      } else if (App.Process.isBuilding(project_id)) {
+        setState('building');
       } else {
         setState('stopped');
       }
@@ -189,6 +198,9 @@
       });
       $container.on('click', '.button-stop', function(e) {
         stopProject();
+      });
+      $container.on('click', '.button-build', function(e) {
+        buildProject();
       });
       $container.on('click', '.button-clear-log', function(e) {
         clearProjectLog();
@@ -218,26 +230,64 @@
       bindEvents(dialog.$el);
     }
 
-    /*this.play = function(project_id) {
-      activeProject = findProject(project_id);
-      projectItemView = App.UI.Grid.getItem(project_id);
-      playProject();
-    }
+    this.startBuild = function() {
+      var meteor = App.Process.buildProject(activeProject);
 
-    this.stop = function(project_id) {
-      activeProject = findProject(project_id);
-      projectItemView = App.UI.Grid.getItem(project_id);
-      stopProject();
-    }*/
+      /*if ($log && $log.length) {
+        $log.empty();
+
+        var log = App.Process.getLog(activeProject.id);
+        _.each(log, function(line) {
+          $log.append('<p>' + line + '</p>');
+        });
+      }*/
+
+      setState('building');
+
+      if (meteor.build) {
+        projectItemView.setState('building');
+
+        // On process finished
+        meteor.build.done(function() {
+          projectItemView.setState();
+          setState('stopped');
+        });
+
+        // On process fail
+        meteor.build.fail(function() {
+          projectItemView.setState('exited');
+          setState('stopped');
+        });
+      } else {
+        // Meteor process unable to start
+        projectItemView.setState('error');
+      }
+    }
 
     this.redraw = function() {
       if (dialog && dialog.$el && dialog.$el.length) {
+        var project_id = activeProject.id;
         dialog.render(viewTpl({
-          project_id: activeProject.id,
+          project_id: project_id,
           project: activeProject,
           image_url: activeProject.image ? 'file://' + activeProject.image.replace(/\\/g, '/') : null
         }));
-        render();
+
+        $log = dialog.find('.log-view');
+        var log = App.Process.getLog(project_id);
+        _.each(log, function(msg) {
+          showLogMessage(msg);
+        });
+
+        $controls = dialog.find('.project-controls');
+        if (App.Process.isRunning(project_id)) {
+          setState('running');
+        } else if (App.Process.isBuilding(project_id)) {
+          setState('building');
+        } else {
+          setState('stopped');
+        }
+        //render(activeProject.id);
       }
     }
 

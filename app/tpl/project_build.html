@@ -1,0 +1,25 @@
+<div class="build-project-container">
+  <h1 class="title">Build Project</h1>
+  <label>Output folder</label>
+  <div class="input-control text text-file full-size">
+      <input id="outputFolderText" type="text" value="{{outputFolder}}">
+      <button class="button file"><span class="mif-folder-open"></span><input id="outputFolder" type="file" nwdirectory></button>
+  </div>
+  <label>Server architecture</label>
+  <div class="input-control text full-size">
+      <select id="serverArchitecture" type="text" value="{{serverArchitecture}}">
+        <option value="os.linux.x86_64">os.linux.x86_64</option>
+        <option value="os.linux.x86_32">os.linux.x86_32</option>
+        <option value="os.osx.x86_64">os.osx.x86_64</option>
+      </select>
+  </div>
+  <label>Server name</label>
+  <div class="input-control text full-size">
+      <input id="serverName" type="text" value="{{serverName}}" placeholder="http://example.com">
+  </div>
+  <p></p>
+	<p class="align-right">
+    <button class="button button-build bg-lightBlue bg-active-blue fg-white" disabled="disabled">Build</button>
+    <button class="button close">Cancel</button>
+  </p>
+</div>
