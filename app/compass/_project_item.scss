@@ -64,10 +64,6 @@
     // Project Item States
     //----------------------------------------------------
 
-    // IDLE (Default)
-    .project-idle {
-      display: block;
-    }
     .project-launched {
       display: none;
       position: absolute;
@@ -79,17 +75,6 @@
       background: rgba(0,0,0,0.6);
       padding-bottom: 6px;
       border: 3px solid #60a917;
-
-      .launch-title {
-        padding: 3px;
-        padding-left: 10px;
-        font-size: 11px;
-        //background: #60a917;
-      }
-      .controls {
-        top: 20px;
-        left: 6px;
-      }
     }
 
     // LAUNCHED
@@ -97,8 +82,13 @@
       .project-launched {
         display: block;
       }
-      .project-idle {
-        display: none;
+    }
+
+    // BUILDING
+    &.state-building {
+      .project-launched {
+        display: block;
+        border: 3px solid #1b6eae;
       }
     }
 

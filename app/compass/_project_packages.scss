@@ -1,0 +1,92 @@
+
+#charmPackages {
+  .package-header {
+    h3 {
+      margin-top: 20px;
+      font-weight: 200;
+    }
+    .button-add {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+
+  .list {
+    margin-bottom: 30px;
+
+    .item {
+      padding: 10px;
+      background: #555;
+      margin-bottom: 4px;
+      cursor: default;
+
+      transition: all 0.2s ease-in-out;
+
+      .button-remove {
+        opacity: 0;
+        cursor: pointer;
+        float: right;
+        width: 30px;
+        height: 30px;
+        padding: 7px;
+        font-size: 16px;
+        transition: all 0.2s ease-in-out;
+        position: absolute;
+        top: 3px;
+        right: 0;
+      }
+
+      .name {
+        font-size: 15px;
+        max-width: 90%;
+        display: inline-block;
+      }
+      .version {
+        font-size: 10px;
+        color: #AAA;
+      }
+
+      &:hover {
+        background-color: #666;
+        .button-remove {
+          opacity: 0.5;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    [data-name="insecure"], [data-name="autopublish"] {
+      .name {
+        color: #f22;
+      }
+    }
+  }
+}
+
+
+.dialog {
+
+  .add-package-container, .remove-package-container {
+    width: 500px;
+
+    .title {
+      font-size: 24px;
+    }
+  }
+
+  .add-package-container {
+    .input-name {
+      width: 100%;
+      padding: 6px;
+    }
+  }
+
+}

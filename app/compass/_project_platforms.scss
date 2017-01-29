@@ -1,0 +1,29 @@
+
+#charmPlatforms {
+  .list {
+    .item {
+      padding: 10px;
+      background: #555;
+      margin-bottom: 4px;
+      cursor: pointer;
+
+      transition: all 0.2s ease-in-out;
+
+      .icon {
+        float: left;
+        width: 20px;
+        height: 20px;
+        padding: 3px;
+        margin-right: 10px;
+      }
+
+      .name {
+        font-size: 17px;
+      }
+
+      &:hover {
+        background-color: #666;
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@
   var ProjectEditorUI = function() {
 
     // == PRIVATE ==============================================================
-   
+
     var _self = this;
     var editorContainer = '#charmEditor';
     var $editor = $(editorContainer);
@@ -37,6 +37,7 @@
     }
 
     var removeProject = function(project) {
+      App.UI.ProjectView.close();
       App.projects = _.without(App.projects, project);
       App.UI.Grid.removeItem(project.id);
       App.File.saveProjects();
@@ -75,7 +76,7 @@
         var dialog = new Dialog('Remove Project', '<p>¿Are you sure you want to remove this project? There is no undo.</p><p class="small">This will only remove the project from Meteor Launcher. All project files will be kept in its folder.</p><div class="actions"><button class="button confirm bg-red bg-active-darkRed fg-white">Remove</button><button class="button cancel bg-grayLight bg-active-gray fg-white">Cancel</button></div>');
         dialog.on('click', '.confirm', function(event) {
           dialog.close();
-          removeProject(activeProject);          
+          removeProject(activeProject);
         });
         dialog.on('click', '.cancel', function(event) {
           dialog.close();
@@ -229,12 +230,12 @@
         port: 3000,
         color: 'bg-grayLight',
         image: '',
-        size: 0, 
-        x: 1000, 
+        size: 0,
+        x: 1000,
         y: 1000
       };
       projectItemView = null;
-      
+
       _self.charm.open(editorTpl({
         editionMode: edit,
         project: activeProject

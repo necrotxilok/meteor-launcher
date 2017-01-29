@@ -38,6 +38,7 @@ node_modules
 *.css.map
 
 # Project
+.builds/
 resources/
 dist/
 nw.lnk

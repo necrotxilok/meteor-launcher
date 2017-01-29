@@ -1,0 +1,105 @@
+
+
+.dialog {
+  .create-project-container {
+    width: 500px;
+
+    label {
+      cursor: default;
+    }
+
+    .button.file {
+      overflow: hidden;
+    }
+
+    .input-control button.file input[type="file"] {
+      padding: 500px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .messages {
+      display: none;
+      .info {
+        font-size: 10px;
+      }
+      .message {
+        display: none;
+        .icon {
+          float: left;
+          display: block;
+          font-size: 20px;
+          margin-bottom: 7px;
+          margin-right: 10px;
+          height: 50px;
+
+          &.mif-checkmark {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .button-create {
+      opacity: 0.5;
+    }
+
+    .creating-overlay {
+      display: none;
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      z-index: 10;
+      text-align: center;
+
+      .loading-box {
+        margin-top: 80px;
+
+        .loading {
+          font-size: 60px;
+          color: #bbb;
+        }
+
+        .success {
+          display: inline-block;
+          border: 2px solid #0B0;
+          color: #0B0;
+          border-radius: 50%;
+          width: 80px;
+          height: 80px;
+          padding: 26px;
+          font-size: 24px;
+          .icon {
+            margin-bottom: 8px;
+          }
+        }
+
+        .error {
+          display: inline-block;
+          color: #B00;
+          .icon {
+            font-size: 64px;
+          }
+        }
+
+        .msg {
+          color: #bbb;
+          margin: 20px 0;
+        }
+
+        .hidden {
+          display: none;
+        }
+      }
+    }
+  }
+}

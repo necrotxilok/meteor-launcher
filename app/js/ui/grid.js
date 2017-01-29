@@ -12,11 +12,12 @@
   var ProjectItem = App.Components.ProjectItem;
 
   var tplManager = App.TplManager;
+  var Dialog = App.Components.Dialog;
 
   var GridUI = function() {
 
     // == PRIVATE ==============================================================
-   
+
     var _self = this;
     var $grid = $('#grid');
 
@@ -29,7 +30,7 @@
         items[project.id] = new ProjectItem($grid, project);
       });
     }
-    
+
     var resize = function(size) {
       if (size) {
         _self.currentSize = size;
@@ -120,7 +121,7 @@
     }
 
     // == INITIALIZE ==============================================================
-    
+
     buildElements(App.projects);
 
     render();

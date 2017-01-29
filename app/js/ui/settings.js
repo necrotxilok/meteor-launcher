@@ -14,9 +14,9 @@
   var SettingsUI = function() {
 
     // == PRIVATE ==============================================================
-   
+
     var settingsContainer = '#charmSettings';
-    var $settings = $(settingsContainer);   
+    var $settings = $(settingsContainer);
 
     var charm = new App.Components.Charm(settingsContainer);
 
@@ -35,13 +35,19 @@
         dialog.close();
       });
       dialog.open();
-      charm.close();
+      //charm.close();
     }
 
     var bindEvents = function() {
         $settings.on('click', '.about-link', function(event) {
             event.preventDefault();
             showAbout();
+        });
+
+        $('.tile-area-controls').on('click', '.button-about', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          showAbout();
         });
     }
 

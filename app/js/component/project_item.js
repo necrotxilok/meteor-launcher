@@ -15,7 +15,7 @@
   var ProjectItem = function($grid, item) {
 
     // == PRIVATE ==============================================================
-   
+
     var _self = this;
     var $item;
     var $log
@@ -84,30 +84,8 @@
         resizeItem();
       });
 
-      $item.on('click', '.settings', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        App.UI.ProjectEditor.openEditProject(project_id);
-      });
-      $item.on('click', '.play', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        App.UI.ProjectView.play(project_id);
-      });
-
-      $item.on('click', '.stop', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        App.UI.ProjectView.stop(project_id);
-      });
-      $item.on('click', '.open', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var url = $(e.currentTarget).attr('href');
-        App.nwGui.Shell.openExternal(url);
-      });
-
       $item.on('contextmenu', function(e) {
+        e.preventDefault();
         App.UI.ProjectEditor.openEditProject(project_id);
       });
     }
@@ -179,7 +157,7 @@
     }
 
     this.update = function(props) {
-      var size = _.findIndex(tileSizes, function(s) { 
+      var size = _.findIndex(tileSizes, function(s) {
         return s.w == props.w && s.h == props.h;
       });
 

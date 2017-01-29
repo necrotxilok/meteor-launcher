@@ -1,0 +1,14 @@
+{{#if error}}
+  <div class="error-message">
+    {{{error}}}
+  </div>
+{{else}}
+  <div class="platforms-list list">
+    {{#each platforms}}
+      <div class="item platform" data-platform="{{@key}}" {{#if active}}data-active="true"{{/if}}>
+        <span class="icon {{#if active}}mif-checkmark{{/if}}"></span>
+        <span class="name">{{name}}</span>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}

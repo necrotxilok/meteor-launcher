@@ -1,9 +1,30 @@
 <div class="project-view">
   <div class="project-controls" data-project-id="{{project_id}}">
-    <button class="image-button button-play bg-green bg-active-darkGreen fg-white">Run<span class="icon mif-play"></span></button>
+    <div class="split-button runner">
+      <button class="image-button button-play bg-green bg-active-darkGreen fg-white">Run<span class="icon mif-play"></span></button>
+      {{#if platformsActive}}
+      <button class="split dropdown-toggle bg-green bg-active-darkGreen fg-white"></button>
+      <ul class="split-content d-menu" data-role="dropdown">
+        {{#if androidActive}}
+          <li><a href="#" class="button-play-platform" data-platform="android">Run on Android</a></li>
+          <li><a href="#" class="button-play-platform" data-platform="android-device">Run on Android Device</a></li>
+        {{/if}}
+        {{#if iosActive}}
+          <li><a href="#" class="button-play-platform" data-platform="ios">Run on iOS</a></li>
+          <li><a href="#" class="button-play-platform" data-platform="ios-device">Run on iOS Device</a></li>
+        {{/if}}
+      </ul>
+      {{/if}}
+    </div>
     <button class="image-button button-stop bg-gray bg-active-grayDarker fg-white">Stop<span class="icon mif-stop"></span></button>
+    <button class="image-button button-build bg-darkCyan bg-active-cyan fg-white">Build<span class="icon mif-download"></span></button>
+    <button class="image-button button-clear-log bg-grayLight bg-active-gray fg-white">Clear<span class="icon mif-not"></span></button>
     <button class="image-button button-console bg-grayLight bg-active-gray fg-white">Console<span class="icon mif-chevron-thin-right"></span></button>
-    <button class="image-button button-edit bg-lightBlue bg-active-blue fg-white place-right">Settings<span class="icon mif-cog"></span></button>
+    <div class="place-right">
+      <button class="image-button button-packages bg-grayLight bg-active-gray fg-white">Packages<span class="icon mif-list"></span></button>
+      <button class="image-button button-platforms bg-grayLight bg-active-gray fg-white">Platforms<span class="icon mif-phonelink"></span></button>
+      <button class="image-button button-edit bg-lightBlue bg-active-blue fg-white">Settings<span class="icon mif-cog"></span></button>
+    </div>
   </div>
   <div class="log">
     <div class="log-background {{project.color}}">
@@ -15,4 +36,5 @@
     </div>
     <div class="log-view"></div>
   </div>
+  <div class="meteor-info"></div>
 </div>
