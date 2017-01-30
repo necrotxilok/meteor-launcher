@@ -23,6 +23,8 @@
 
     if (process.platform == 'win32') {
       meteorExec = 'meteor.bat';
+    } else if (process.platform == 'darwin') {
+      meteorExec = '~/.meteor/meteor';
     } else {
       meteorExec = 'meteor';
     }
