@@ -32,6 +32,7 @@ Go to [project page](http://necrotxilok.github.io/meteor-launcher/) to download 
 - [Handlebars](http://handlebarsjs.com/)
 - [Sass](http://sass-lang.com/)
 - [Metro UI CSS](https://metroui.org.ua/)
+- [Inno Setup](http://www.jrsoftware.org/isinfo.php)
 
 
 Developed by [necro_txilok](https://github.com/necrotxilok)
